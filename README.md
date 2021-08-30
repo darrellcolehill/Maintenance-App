@@ -14,7 +14,10 @@
 > a ranking or points based on how many useful reports they have 
 > reported, how fast a landlord resolved the issue, and how reliably the handyman fixed the problem. 
 
-## Helpful Links
+## Google Sheets Link
+- [Click me #UwU] (https://docs.google.com/spreadsheets/d/16mKJtwNAgq15PcCzK8cvLiK34q0-96wFSoO1pmSr0Wg/edit?usp=sharing)
+
+## Helpful Learning Material
 - [What is Firebase](https://www.youtube.com/watch?v=-pyo67HWuOI)
 
 - [Why Firebase? HOW to determine whether YOU should use FIREBASE](https://www.youtube.com/watch?v=urdyRxsuBxQ)
