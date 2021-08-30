@@ -23,3 +23,9 @@
 - [Why Firebase? HOW to determine whether YOU should use FIREBASE](https://www.youtube.com/watch?v=urdyRxsuBxQ)
 
 - [Firebase Ultimate Beginner's Guide](https://www.youtube.com/watch?v=9kRgVxULbag&t=1098s)
+
+- [W3School HTML](https://www.w3schools.com/html/default.asp)
+
+- [W3School CSS](https://www.w3schools.com/css/default.asp)
+
+- [W3School JavaScript](https://www.w3schools.com/js/default.asp)
