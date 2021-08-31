@@ -27,11 +27,15 @@
 
 - [Firebase Documentation. Role Based Access Example](https://firebase.google.com/docs/firestore/solutions/role-based-access)
 
+### SQL and NoSQL
+
 - [How do NoSQL datebases work? Simply Explained!](https://www.youtube.com/watch?v=0buKQHokLK8)
 
 - [Which Is Better? SQL vs NoSQL](https://www.youtube.com/watch?v=t0GlGbtMTio)
 
 - [SQL vs NoSQL Explained](https://www.youtube.com/watch?v=ruz-vK8IesE)
+
+### Front-end Web Design
 
 - [W3School HTML](https://www.w3schools.com/html/default.asp)
 
