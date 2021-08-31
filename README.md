@@ -24,6 +24,14 @@
 
 - [Firebase Ultimate Beginner's Guide](https://www.youtube.com/watch?v=9kRgVxULbag&t=1098s)
 
+- [Firebase Documentation. Role Based Access Example](https://firebase.google.com/docs/firestore/solutions/role-based-access)
+
+- [How do NoSQL datebases work? Simply Explained!](https://www.youtube.com/watch?v=0buKQHokLK8)
+
+- [Which Is Better? SQL vs NoSQL](https://www.youtube.com/watch?v=t0GlGbtMTio)
+
+- [SQL vs NoSQL Explained](https://www.youtube.com/watch?v=ruz-vK8IesE)
+
 - [W3School HTML](https://www.w3schools.com/html/default.asp)
 
 - [W3School CSS](https://www.w3schools.com/css/default.asp)
