@@ -43,6 +43,10 @@
 
 - [Building a Node API with Express and Google Cloud SQL](https://austinhale.medium.com/building-a-node-api-with-express-and-google-cloud-sql-9bda260b040f) NOTE: reference when we want to migrate from SQL on a local host to a cloud based solution
 
+- [Building a REST API with Express and Mongoose (MongoDB)](https://github.com/rahmanfadhil/learn-express-mongoose)
+
+- [Data relationships with Mongoose (MongoDB): one-to-many, many-to-one](https://www.bezkoder.com/mongoose-one-to-many-relationship/#Case_3_Mongoose_One-to-Many_aLot_Relationship)
+
 ### Front-end Web Design
 
 - [W3School HTML](https://www.w3schools.com/html/default.asp)
