@@ -53,3 +53,5 @@
 
 ### Node.js
 - [How to Install Express Application Using Express Generator Tool](https://codingstatus.com/how-to-install-express-application-using-express-generator-tool/)
+
+-[Modern Token Authentication in Node with Express](https://developer.okta.com/blog/2019/02/14/modern-token-authentication-in-node-with-express)
