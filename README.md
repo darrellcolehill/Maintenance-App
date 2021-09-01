@@ -35,6 +35,8 @@
 
 - [SQL vs NoSQL Explained](https://www.youtube.com/watch?v=ruz-vK8IesE)
 
+- [Node.js MySQL Tutorial | Building CRUD App with Node.js Express and MySQL](https://www.youtube.com/watch?v=xn9ef5pod18)
+
 ### Front-end Web Design
 
 - [W3School HTML](https://www.w3schools.com/html/default.asp)
