@@ -71,3 +71,16 @@
 - [Session Management in Node.js using ExpressJS and Express Session](https://www.section.io/engineering-education/session-management-in-nodejs-using-expressjs-and-express-session/)
 
 - [Upload and Store Images in MySQL using Node.Js, Express, Express-FileUpload & Express-Handlebars](https://www.youtube.com/watch?v=hyJiNTFtQic)
+
+
+<details>
+<summary>Heading</summary>
+<ul>
+<li> markdown list 1</li>
+<ul>
+<li> nested list 1</li>
+<li> nested list 2</li>
+</ul>
+<li> markdown list 2</li>
+</ul>
+</details>
