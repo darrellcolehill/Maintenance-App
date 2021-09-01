@@ -19,68 +19,55 @@
 
 ## Helpful Learning Material
 ### Firebase
-- [What is Firebase](https://www.youtube.com/watch?v=-pyo67HWuOI)
-
-- [Why Firebase? HOW to determine whether YOU should use FIREBASE](https://www.youtube.com/watch?v=urdyRxsuBxQ)
-
-- [Firebase Ultimate Beginner's Guide](https://www.youtube.com/watch?v=9kRgVxULbag&t=1098s)
-
-- [Firebase Documentation. Role Based Access Example](https://firebase.google.com/docs/firestore/solutions/role-based-access)
+<details>
+  <summary></summary>
+  <ul>
+  <li> <a href="https://www.youtube.com/watch?v=-pyo67HWuOI">What is Firebase </a> </li>
+  <li> <a href="https://www.youtube.com/watch?v=urdyRxsuBxQ">Why Firebase? HOW to determine whether YOU should use FIREBASE </a> </li>
+  <li> <a href="https://www.youtube.com/watch?v=9kRgVxULbag&t=1098s">Firebase Ultimate Beginner's Guide </a> </li>
+  <li> <a href="https://firebase.google.com/docs/firestore/solutions/role-based-access">Firebase Documentation. Role Based Access Example </a> </li>
+  </ul>
+</details>
 
 ### SQL and NoSQL
+<details>
+  <summary></summary>
+  <ul>
+  <li> <a href="https://www.youtube.com/watch?v=0buKQHokLK8">How do NoSQL datebases work? Simply Explained! </a> </li>
+  <li> <a href="https://www.youtube.com/watch?v=t0GlGbtMTio">Which Is Better? SQL vs NoSQL </a> </li>
+  <li> <a href="https://www.youtube.com/watch?v=ruz-vK8IesE">SQL vs NoSQL Explained </a> </li>
+  <li> <a href="https://web.csulb.edu/colleges/coe/cecs/dbdesign/dbdesign.php?page=sql/queries.php">Datebase Design - Queries </a> </li>
+  <li> <a href="https://www.youtube.com/watch?v=xn9ef5pod18">Node.js MySQL Tutorial | Building CRUD App with Node.js Express and MySQL </a> </li>
+  <li> <a href="https://codingstatus.com/how-to-display-data-from-mysql-database-table-in-node-js/">How to display Data from MySQL using Node.js NOTE: reference when we want to migrate from SQL on a local host to a cloud based solution</a> </li>
+  <li> <a href="https://austinhale.medium.com/building-a-node-api-with-express-and-google-cloud-sql-9bda260b040f">Building a Node API with Express and Google Cloud SQL NOTE: reference when we want to migrate from SQL on a local host to a cloud based solution </a> </li>
+  <li> <a href="https://github.com/rahmanfadhil/learn-express-mongoose">Building a REST API with Express and Mongoose (MongoDB) </a> </li>
+  <li> <a href="https://www.bezkoder.com/mongoose-one-to-many-relationship/#Case_3_Mongoose_One-to-Many_aLot_Relationship">Data relationships with Mongoose (MongoDB): one-to-many, many-to-one </a> </li>
+  <li> <a href="https://medium.com/@rithwikkukunuri30/database-design-for-facebook-4f52b55ebe94">Database design for Facebook </a> </li>
+  <li> <a href="https://www.w3schools.com/nodejs/nodejs_mysql_create_table.asp">Node.js MySQL Create Table </a> </li>
+  </ul>
+</details>
 
-- [How do NoSQL datebases work? Simply Explained!](https://www.youtube.com/watch?v=0buKQHokLK8)
 
-- [Which Is Better? SQL vs NoSQL](https://www.youtube.com/watch?v=t0GlGbtMTio)
-
-- [SQL vs NoSQL Explained](https://www.youtube.com/watch?v=ruz-vK8IesE)
-
-- [Datebase Design - Queries](https://web.csulb.edu/colleges/coe/cecs/dbdesign/dbdesign.php?page=sql/queries.php)
-
-- [Node.js MySQL Tutorial | Building CRUD App with Node.js Express and MySQL](https://www.youtube.com/watch?v=xn9ef5pod18)
-
-- [How to display Data from MySQL using Node.js](https://codingstatus.com/how-to-display-data-from-mysql-database-table-in-node-js/) NOTE: reference for creating user dashboards
-
-- [Building a Node API with Express and Google Cloud SQL](https://austinhale.medium.com/building-a-node-api-with-express-and-google-cloud-sql-9bda260b040f) NOTE: reference when we want to migrate from SQL on a local host to a cloud based solution
-
-- [Building a REST API with Express and Mongoose (MongoDB)](https://github.com/rahmanfadhil/learn-express-mongoose)
-
-- [Data relationships with Mongoose (MongoDB): one-to-many, many-to-one](https://www.bezkoder.com/mongoose-one-to-many-relationship/#Case_3_Mongoose_One-to-Many_aLot_Relationship)
-
-- [Database design for Facebook](https://medium.com/@rithwikkukunuri30/database-design-for-facebook-4f52b55ebe94)
-
-- [Node.js MySQL Create Table](https://www.w3schools.com/nodejs/nodejs_mysql_create_table.asp)
 
 ### Front-end Web Design
-
-- [W3School HTML](https://www.w3schools.com/html/default.asp)
-
-- [W3School CSS](https://www.w3schools.com/css/default.asp)
-
-- [W3School JavaScript](https://www.w3schools.com/js/default.asp)
+<details>
+  <summary></summary>
+  <ul>
+  <li> <a href="https://www.w3schools.com/html/default.asp">W3School HTML </a> </li>
+  <li><a href="https://www.w3schools.com/css/default.asp">W3School CSS </a></li>
+  <li><a href="https://www.w3schools.com/js/default.asp">W3School JavaScript </a></li>
+  </ul>
+</details>
 
 ### Node.js
-- [How to Install Express Application Using Express Generator Tool](https://codingstatus.com/how-to-install-express-application-using-express-generator-tool/)
-
-- [Modern Token Authentication in Node with Express](https://developer.okta.com/blog/2019/02/14/modern-token-authentication-in-node-with-express)
-
-- [Security Issues in JWT Authentication](https://www.softwaresecured.com/security-issues-jwt-authentication/)
-
-- [Introduction to JSON Web Tokens](https://jwt.io/introduction)
-
-- [Session Management in Node.js using ExpressJS and Express Session](https://www.section.io/engineering-education/session-management-in-nodejs-using-expressjs-and-express-session/)
-
-- [Upload and Store Images in MySQL using Node.Js, Express, Express-FileUpload & Express-Handlebars](https://www.youtube.com/watch?v=hyJiNTFtQic)
-
-
 <details>
-<summary>Heading</summary>
+  <summary></summary>
 <ul>
-<li> markdown list 1</li>
-<ul>
-<li> nested list 1</li>
-<li> nested list 2</li>
-</ul>
-<li> markdown list 2</li>
+<li> <a href="https://codingstatus.com/how-to-install-express-application-using-express-generator-tool/">How to Install Express Application Using Express Generator Tool</a> </li>
+<li> <a href="https://developer.okta.com/blog/2019/02/14/modern-token-authentication-in-node-with-express">Modern Token Authentication in Node with Express </a> </li>
+<li> <a href="https://www.softwaresecured.com/security-issues-jwt-authentication/">Security Issues in JWT Authentication </a> </li>
+<li> <a href="https://jwt.io/introduction">Introduction to JSON Web Tokens </a> </li>
+<li> <a href="https://www.section.io/engineering-education/session-management-in-nodejs-using-expressjs-and-express-session/">Session Management in Node.js using ExpressJS and Express Session </a> </li>
+<li> <a href="https://www.youtube.com/watch?v=hyJiNTFtQic">Upload and Store Images in MySQL using Node.Js, Express, Express-FileUpload & Express-Handlebars </a> </li>
 </ul>
 </details>
