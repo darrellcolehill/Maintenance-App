@@ -63,3 +63,5 @@
 - [Security Issues in JWT Authentication](https://www.softwaresecured.com/security-issues-jwt-authentication/)
 
 - [Introduction to JSON Web Tokens](https://jwt.io/introduction)
+
+- [Session Management in Node.js using ExpressJS and Express Session](https://www.section.io/engineering-education/session-management-in-nodejs-using-expressjs-and-express-session/)
