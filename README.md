@@ -35,6 +35,8 @@
 
 - [SQL vs NoSQL Explained](https://www.youtube.com/watch?v=ruz-vK8IesE)
 
+- [Datebase Design - Queries](https://web.csulb.edu/colleges/coe/cecs/dbdesign/dbdesign.php?page=sql/queries.php)
+
 - [Node.js MySQL Tutorial | Building CRUD App with Node.js Express and MySQL](https://www.youtube.com/watch?v=xn9ef5pod18)
 
 - [How to display Data from MySQL using Node.js](https://codingstatus.com/how-to-display-data-from-mysql-database-table-in-node-js/) NOTE: reference for creating user dashboards
