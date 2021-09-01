@@ -47,6 +47,8 @@
 
 - [Data relationships with Mongoose (MongoDB): one-to-many, many-to-one](https://www.bezkoder.com/mongoose-one-to-many-relationship/#Case_3_Mongoose_One-to-Many_aLot_Relationship)
 
+- [Database design for Facebook](https://medium.com/@rithwikkukunuri30/database-design-for-facebook-4f52b55ebe94)
+
 ### Front-end Web Design
 
 - [W3School HTML](https://www.w3schools.com/html/default.asp)
