@@ -41,6 +41,8 @@
 
 - [How to display Data from MySQL using Node.js](https://codingstatus.com/how-to-display-data-from-mysql-database-table-in-node-js/) NOTE: reference for creating user dashboards
 
+- [Building a Node API with Express and Google Cloud SQL](https://austinhale.medium.com/building-a-node-api-with-express-and-google-cloud-sql-9bda260b040f) NOTE: reference when we want to migrate from SQL on a local host to a cloud based solution
+
 ### Front-end Web Design
 
 - [W3School HTML](https://www.w3schools.com/html/default.asp)
