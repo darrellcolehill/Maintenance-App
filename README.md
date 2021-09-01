@@ -49,6 +49,8 @@
 
 - [Database design for Facebook](https://medium.com/@rithwikkukunuri30/database-design-for-facebook-4f52b55ebe94)
 
+- [Node.js MySQL Create Table](https://www.w3schools.com/nodejs/nodejs_mysql_create_table.asp)
+
 ### Front-end Web Design
 
 - [W3School HTML](https://www.w3schools.com/html/default.asp)
