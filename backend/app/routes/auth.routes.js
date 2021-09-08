@@ -3,7 +3,7 @@ const express = require("express"),
 var auth = require("../controllers/auth.controller")
 
 /**
- * POST /login: logs a user in and assigns them a token
+ * POST /auth/login: logs a user in and assigns them a token
  * 
  * Required parameters in request body:
  *  username (string): the username for the user
@@ -14,7 +14,7 @@ var auth = require("../controllers/auth.controller")
 router.post("/login", auth.login)
 
 /**
- * POST /signup: Makes a new account for a user
+ * POST /auth/signup: Makes a new account for a user
  * 
  * Required parameters in request body:
  *  username (string): the username for the user.
