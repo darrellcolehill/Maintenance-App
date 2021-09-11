@@ -1,7 +1,7 @@
 const express = require("express"),
     app = express()
 const cors = require("cors")
-const config = require("./config")
+const config = require("./config.json")
 const authRoutes = require("./auth/routes")
 const jwt = require("express-jwt")
 const handleError = require("./middlewares/errorHandler")

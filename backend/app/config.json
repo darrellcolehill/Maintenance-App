@@ -1,10 +1,6 @@
 {
     "databaseUrl": "mongodb+srv://maintenance-app:twenty-five@cluster0.tyjhn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
     "jwtSecret": "sirr",
-    "jwtSession": {
-        "session": false,
-        "failWithError": true
-    },
     "frontendPort": "8081",
     "backendPort": "8080"
 }
