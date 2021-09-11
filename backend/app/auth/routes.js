@@ -1,6 +1,6 @@
 const express = require("express"),
     router = express.Router()
-var auth = require("../controllers/auth.controller")
+var auth = require("./controller")
 
 /**
  * POST /auth/login: logs a user in and assigns them a token

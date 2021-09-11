@@ -1,10 +1,10 @@
 const User = require("../models/user.model")
-const config = require("../../config")
+const config = require("../config")
 const jwt = require("jsonwebtoken")
 
 const jwtSecret = config.jwtSecret
 
-exports.login = (req, res) => {
+exports.login = (req, res, next) => {
     var name = req.body.username, pass = req.body.password
     if (!name || !pass) {
         return res.status(401).json({
@@ -13,10 +13,8 @@ exports.login = (req, res) => {
     }
     User.findOne({ username: name }, (err, user) => {
         if (err) {
-            console.log(`findOne error in auth controller: ${err}`)
-            return
-        }
-        else if (!user) {
+            return next(err)
+        } else if (!user) {
             return res.status(401).json({
                 message: "Invalid username or password"
             })
@@ -35,7 +33,7 @@ exports.login = (req, res) => {
                     }
                     var options = {
                         "expiresIn": "24 hours"
-                    } 
+                    }
                     return res.status(200).json({
                         token: jwt.sign(payload, jwtSecret, options)
                     })
@@ -45,7 +43,7 @@ exports.login = (req, res) => {
     })
 }
 
-exports.signup = (req, res) => {
+exports.signup = (req, res, next) => {
     var name = req.body.username, pass = req.body.password
     if (!name || !pass) {
         return res.status(400).json({
@@ -57,7 +55,7 @@ exports.signup = (req, res) => {
             return next(err)
         }
         else if (user) {
-            return res.status(401).json({
+            return res.status(400).json({
                 message: "Username already exists"
             })
         } else {
