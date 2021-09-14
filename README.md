@@ -72,3 +72,14 @@
 <li> <a href="https://www.youtube.com/watch?v=hyJiNTFtQic">Upload and Store Images in MySQL using Node.Js, Express, Express-FileUpload & Express-Handlebars </a> </li>
 </ul>
 </details>
+
+### React Native and Android Studio
+<details>
+  <summary></summary>
+<ul>
+<li> <a href="https://reactnative.dev">React Native Homepage </a> </li>
+<li> <a href="https://www.pluralsight.com/guides/getting-started-with-reactnative-on-android">Getting Started with React Native on Android </a> </li>
+<li> <a href="https://reactnative.dev/docs/environment-setup">React Native Environment setup </a> </li>
+<li> <a href="https://developer.android.com/studio">Android Studio Webpage </a> <li>
+</ul>
+</details>
