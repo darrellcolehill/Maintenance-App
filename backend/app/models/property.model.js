@@ -1,12 +1,12 @@
-var mongoose = require("mongoose")
+var mongoose = require("mongoose");
 
 const schema = mongoose.Schema({
 	name: String,
 	visibility: {
-        type: String,
-        enum: ['public', 'private'],
-        default: 'private'
-    }
+		type: String,
+		enum: ["public", "private"],
+		default: "private"
+	}
 });
 
 module.exports = mongoose.model("Property", schema);

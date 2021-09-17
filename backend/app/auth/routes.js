@@ -1,6 +1,6 @@
 const express = require("express"),
-    router = express.Router()
-var auth = require("./controller")
+	router = express.Router();
+var auth = require("./controller");
 
 /**
  * POST /auth/login: logs a user in and assigns them a token
@@ -11,7 +11,7 @@ var auth = require("./controller")
  * 
  * Responds with an error if username/password is invalid.
  */
-router.post("/login", auth.login)
+router.post("/login", auth.login);
 
 /**
  * POST /auth/signup: Makes a new account for a user
@@ -22,6 +22,6 @@ router.post("/login", auth.login)
  * 
  * Responds with an error if the username was already taken.
  */
-router.post("/signup", auth.signup)
+router.post("/signup", auth.signup);
 
-module.exports = router
+module.exports = router;
