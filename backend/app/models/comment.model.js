@@ -1,3 +1,5 @@
+var mongoose = require("mongoose")
+
 const schema = mongoose.Schema({
 	content: String,
 	author_id: String,
