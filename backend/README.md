@@ -1,15 +1,24 @@
-
 ## Project setup
 ```
 npm install
 ```
 
-### Run
+### Run project
 ```
 npm start
 ```
 
-### Test
+### Run testing scripts
 ```
 npm test
+```
+
+### Check coding style
+```
+npm run lint
+```
+
+## Fix coding style issues automatically
+```
+npm run lint -- --fix
 ```
