@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./app/server.js",
     "dev": "nodemon ./app/server.js",
-    "test": "mocha tests/**/*.test.js",
+    "test": "mocha tests/**/*.test.js --require=env-test",
     "lint": "eslint app/**/*.js"
   },
   "contributors": [
@@ -26,6 +26,7 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "env-test": "^1.0.0",
     "eslint": "^7.32.0",
     "mocha": "^9.1.1",
     "mongodb-memory-server": "^7.4.0",

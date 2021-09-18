@@ -1,11 +1,8 @@
 const mongoose = require("mongoose")
 const config = require("./config")
-const logger = require("morgan")
 const app = require(".")
 
-// log requests to console
-app.use(logger("dev"))
-
+// connect to database
 mongoose
     .connect(config.databaseUrl, {
         useNewUrlParser: true,
