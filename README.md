@@ -70,6 +70,7 @@
 <li> <a href="https://jwt.io/introduction">Introduction to JSON Web Tokens </a> </li>
 <li> <a href="https://www.section.io/engineering-education/session-management-in-nodejs-using-expressjs-and-express-session/">Session Management in Node.js using ExpressJS and Express Session </a> </li>
 <li> <a href="https://www.youtube.com/watch?v=hyJiNTFtQic">Upload and Store Images in MySQL using Node.Js, Express, Express-FileUpload & Express-Handlebars </a> </li>
+  <li> <a href="https://www.youtube.com/watch?v=pt_cwna0r0s"> Promises Vs Async-await in JavaScript </li>
 </ul>
 </details>
 
