@@ -1,3 +1,7 @@
+/*
+ * Functions for communicating with the backend
+ */
+
 function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }

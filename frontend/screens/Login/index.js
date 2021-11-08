@@ -1,15 +1,19 @@
 import React from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Button, Text, Title } from "react-native-paper";
 import LoginForm from "./LoginForm";
-import { StyleSheet } from "react-native";
 import { observer } from "mobx-react";
 import { AuthStore } from "../../stores/auth";
-import { performLogin } from "../../actions";
+import * as Api from "../../api";
 
 const Login = observer(function ({ navigation }) {
-  function handleLogin(username, password) {
-    performLogin(username, password);
+  async function handleLogin(username, password) {
+    AuthStore.startLoading();
+    let response = await Api.login(username, password);
+    let token = response.token;
+    AuthStore.stopLoading();
+
+    AuthStore.login(username, token);
   }
 
   return (

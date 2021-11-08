@@ -1,3 +1,7 @@
+/*
+ * Manages authentication state (whether logged in, token, username, etc)
+ */
+
 import { makeAutoObservable } from "mobx";
 
 class AuthModel {
