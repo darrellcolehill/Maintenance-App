@@ -2,16 +2,16 @@
  * Note: we don't always *need* to nest stack navigators inside
  * the main tab navigator. It's only needed when a tab can have
  * more than one screen. Otherwise we can put just the component
-*/
+ */
 
-import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Home } from "../screens/Home"
-import { Messages } from "../screens/Messages"
-import { MessageContent } from "../screens/Messages/MessageContent"
-import { Profile } from '../screens/Profile';
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Home } from "../screens/Home";
+import { Messages } from "../screens/Messages";
+import { MessageContent } from "../screens/Messages/MessageContent";
+import { Profile } from "../screens/Profile";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -21,7 +21,7 @@ function HomeNav() {
     <Stack.Navigator>
       <Stack.Screen name="Home" component={Home} />
     </Stack.Navigator>
-  )
+  );
 }
 
 function MessagesNav() {
@@ -30,7 +30,7 @@ function MessagesNav() {
       <Stack.Screen name="Messages" component={Messages} />
       <Stack.Screen name="Message content" component={MessageContent} />
     </Stack.Navigator>
-  )
+  );
 }
 
 function ProfileNav() {
@@ -38,7 +38,7 @@ function ProfileNav() {
     <Stack.Navigator>
       <Stack.Screen name="Profile" component={Profile} />
     </Stack.Navigator>
-  )
+  );
 }
 
 function AppNavigator() {

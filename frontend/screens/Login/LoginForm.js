@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { TextInput, Button } from 'react-native-paper';
+import React, { useState } from "react";
+import { TextInput, Button } from "react-native-paper";
 
 function LoginForm(props) {
-  let [username, setUsername] = useState('');
-  let [password, setPassword] = useState('');
+  let [username, setUsername] = useState("");
+  let [password, setPassword] = useState("");
   return (
     <>
       <TextInput
@@ -18,7 +18,8 @@ function LoginForm(props) {
       <Button
         icon="login"
         mode="contained"
-        onPress={() => props.handler(username, password)}>
+        onPress={() => props.handler(username, password)}
+      >
         Log In
       </Button>
     </>

@@ -1,5 +1,5 @@
-import { AuthStore } from '../stores/auth';
-import * as Api from '../api';
+import { AuthStore } from "../stores/auth";
+import * as Api from "../api";
 
 export let performLogin = async (username, password) => {
   AuthStore.startLoading();

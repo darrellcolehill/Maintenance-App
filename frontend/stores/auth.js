@@ -1,11 +1,11 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable } from "mobx";
 
 class AuthModel {
-  username = '';
+  username = "";
   loggedIn = false;
 
   // for authentication with backend (not used yet)
-  token = '';
+  token = "";
 
   // to show a loading screen if login is taking time
   loading = false;

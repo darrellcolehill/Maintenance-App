@@ -1,13 +1,13 @@
-import React from 'react';
-import RootNavigator from './navigations/RootNavigator';
-import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import React from "react";
+import RootNavigator from "./navigations/RootNavigator";
+import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 
 const theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: 'skyblue',
-    accent: 'yellow',
+    primary: "skyblue",
+    accent: "yellow",
   },
 };
 

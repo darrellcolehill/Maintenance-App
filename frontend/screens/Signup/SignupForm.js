@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button, TextInput } from 'react-native-paper';
+import React from "react";
+import { Button, TextInput } from "react-native-paper";
 
 function SignupForm() {
   return (

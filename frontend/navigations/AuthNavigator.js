@@ -1,10 +1,10 @@
-import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Login from '../screens/Login';
-import Signup from '../screens/Signup';
-import LoadingSpinner from '../screens/LoadingSpinner';
-import { observer } from 'mobx-react';
-import { AuthStore } from '../stores/auth';
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Login from "../screens/Login";
+import Signup from "../screens/Signup";
+import LoadingSpinner from "../screens/LoadingSpinner";
+import { observer } from "mobx-react";
+import { AuthStore } from "../stores/auth";
 
 const Stack = createNativeStackNavigator();
 

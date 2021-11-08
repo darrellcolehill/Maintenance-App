@@ -1,6 +1,6 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button, Text, Title } from 'react-native-paper';
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import { Button, Text, Title } from "react-native-paper";
 
 export function Profile() {
   return (
@@ -12,6 +12,6 @@ export function Profile() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
 });

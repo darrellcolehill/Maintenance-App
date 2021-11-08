@@ -1,7 +1,7 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Text, Button } from 'react-native-paper';
-import { AuthStore } from '../../stores/auth';
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import { Text, Button } from "react-native-paper";
+import { AuthStore } from "../../stores/auth";
 
 export function Home({ navigation }) {
   let username = AuthStore.username;
