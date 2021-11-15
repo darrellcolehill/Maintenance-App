@@ -27,14 +27,6 @@ app.get("/", (_req, res) => {
 	res.json({ message: "I'm running!" });
 })
 
-// protected route for testing
-app.get("/secret",
-	jwt({ secret: config.jwtSecret, algorithms: ['HS256'] }),
-	function (_req, res) {
-		return res.status(200).send("Welcome!")
-	}
-)
-
 // sends client a simple JSON response when a request errors out
 app.use(handleError)
 
