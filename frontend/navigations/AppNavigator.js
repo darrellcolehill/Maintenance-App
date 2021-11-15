@@ -11,6 +11,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Home } from "../screens/Home";
 import { Messages } from "../screens/Messages";
 import { MessageContent } from "../screens/Messages/MessageContent";
+import { NewMessage } from "../screens/Messages/NewMessage"
 import { Profile } from "../screens/Profile";
 
 const Tab = createBottomTabNavigator();
@@ -29,6 +30,7 @@ function MessagesNav() {
     <Stack.Navigator>
       <Stack.Screen name="Messages" component={Messages} />
       <Stack.Screen name="Message content" component={MessageContent} />
+      <Stack.Screen name="New message" component={NewMessage} />
     </Stack.Navigator>
   );
 }

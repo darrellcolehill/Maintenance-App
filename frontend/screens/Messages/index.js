@@ -7,44 +7,30 @@ import {
   StyleSheet,
 } from "react-native";
 import { data } from "./sampleData";
-import FullMessage from "./MessageContent";
-import { useNavigation } from "@react-navigation/native";
+import { List, FAB } from 'react-native-paper';
 
 // renders each item in the list of messages
-function MessageItem({ item, onPress, backgroundColor, textColor }) {
+function MessageItem({ item, onPress }) {
   const { message, sender } = item;
 
-  // credit to user "KooiInc" https://stackoverflow.com/a/1199420
-  function truncate(str, n) {
-    return str.length > n ? str.substr(0, n - 1) + "..." : str;
-  }
-
-  const maxLength = 75; // max length of preview text
-  let truncatedMessage = truncate(message, maxLength);
-
   return (
-    <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-      <Text style={[textColor]}>From {sender}</Text>
-      <Text style={[textColor]}>{truncatedMessage}</Text>
+    <TouchableOpacity onPress={onPress} style={[styles.item]}>
+      <List.Item
+        title={`From ${sender}`}
+        description={message}
+        left={props => <List.Icon {...props} icon="message" />}
+      />
     </TouchableOpacity>
   );
 }
 
 // renders the messages screen with a list of messages
-export function Messages() {
-  const navigator = useNavigation();
-  const [selectedId, setSelectedId] = useState(null);
-
+export function Messages({ navigation }) {
   const renderItem = ({ item }) => {
-    const backgroundColor = item.id === selectedId ? "#0e7587" : "#e0e0e0";
-    const color = item.id === selectedId ? "white" : "black";
-
     return (
       <MessageItem
         item={item}
-        onPress={() => navigator.navigate("Message content", { item: item })}
-        backgroundColor={{ backgroundColor }}
-        textColor={{ color }}
+        onPress={() => navigation.navigate("Message content", { item: item })}
       />
     );
   };
@@ -55,7 +41,11 @@ export function Messages() {
         data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        extraData={selectedId}
+      />
+      <FAB 
+        style={styles.fab}
+        icon="plus"
+        onPress={() => navigation.navigate("New message")}
       />
     </View>
   );
@@ -66,11 +56,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   item: {
-    padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
+    backgroundColor: "#e0e0e0",
   },
   title: {
     fontSize: 32,
   },
+  fab: {
+    position: "absolute",
+    margin: 16,
+    right: 0,
+    bottom: 0,
+  }
 });
