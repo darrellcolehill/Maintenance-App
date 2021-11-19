@@ -1,6 +1,8 @@
 const sqlite3 = require("sqlite3");
 const { open } = require("sqlite");
 
+let dbUrl = (process.env.NODE_ENV === "test") ? ":memory:" : "./app/data.sqlite3";
+
 let _db = null;
 
 module.exports.openDb = function() 
@@ -15,7 +17,7 @@ module.exports.openDb = function()
 		else
 		{
 			open({
-				filename: "./app/data.sqlite3",
+				filename: dbUrl,
 				driver: sqlite3.Database
 			}).then((db) => 
 			{
