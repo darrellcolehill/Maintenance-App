@@ -1,33 +1,34 @@
 const express = require("express"),
-	app = express()
-const cors = require("cors")
-const config = require("./config.json")
-const authRoutes = require("./auth/routes")
-const jwt = require("express-jwt")
-const handleError = require("./middlewares/errorHandler")
-const logger = require("morgan")
+	app = express();
+const cors = require("cors");
+const config = require("./config.json");
+const authRoutes = require("./auth/routes");
+const jwt = require("express-jwt");
+const handleError = require("./middlewares/errorHandler");
+const logger = require("morgan");
 
 // log requests to console
-app.use(logger("dev", { skip: () => process.env.NODE_ENV === 'test' }));
+app.use(logger("dev", { skip: () => process.env.NODE_ENV === "test" }));
 
 // allow requests from a frontend
-app.use(cors({ origin: `http://localhost:${config.frontendPort}` }))
+app.use(cors({ origin: `http://localhost:${config.frontendPort}` }));
 
 // parse requests of content-type - application/json
-app.use(express.json())
+app.use(express.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
 
 // set up routes
-app.use("/auth", authRoutes)
+app.use("/auth", authRoutes);
 
 // simple route for testing
-app.get("/", (_req, res) => {
+app.get("/", (_req, res) => 
+{
 	res.json({ message: "I'm running!" });
-})
+});
 
 // sends client a simple JSON response when a request errors out
-app.use(handleError)
+app.use(handleError);
 
-module.exports = app
+module.exports = app;
