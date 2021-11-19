@@ -1,5 +1,5 @@
 /* from https://github.com/pawap90/test-mongoose-inmemory/blob/master/tests/db-handler.js */
-const { openDb, getDb } = require("../app/db");
+const { openDb, getDb, setupCommands } = require("../app/database");
 
 /**
  * Connect to the in-memory database.
@@ -7,7 +7,9 @@ const { openDb, getDb } = require("../app/db");
 module.exports.connect = async () => 
 {
     const db = await openDb();
-    await db.run("CREATE TABLE IF NOT EXISTS users (username STRING, password STRING, email STRING)")
+    setupCommands.forEach(async cmd => {
+        await db.run(cmd);
+    });
 };
 
 /**

@@ -1,5 +1,5 @@
 const config = require("../config");
-const { getDb } = require("../db");
+const { getDb } = require("../database");
 const jwt = require("jsonwebtoken");
 
 const jwtSecret = config.jwtSecret;
@@ -13,7 +13,7 @@ exports.login = (req, res, next) =>
 			message: "Missing username or password"
 		});
 	}
-	// TODO database stuff
+	
 	const db = getDb();
 	db.get("SELECT * FROM users WHERE username = ?", username)
 		.then(user => 
@@ -52,7 +52,7 @@ exports.signup = (req, res, next) =>
 			message: "Missing username or password"
 		});
 	}
-	// TODO database stuff
+	
 	const db = getDb();
 	db.get("SELECT (rowid) FROM users WHERE username = ?", username)
 		.then(user => 

@@ -3,12 +3,14 @@ const express = require("express"),
 var auth = require("./controller");
 
 /**
- * TODO implementation
+ * params: username, password
+ * on success, responds with status 200 and the authentication token
  */
 router.post("/login", auth.login);
 
 /**
- * TODO implementation
+ * params: username, password, email
+ * on success, responds with status 200 on success
  */
 router.post("/signup", auth.signup);
 

@@ -1,5 +1,6 @@
 const sqlite3 = require("sqlite3");
 const { open } = require("sqlite");
+const setupCommands = require("./setupCommands");
 
 let dbUrl = (process.env.NODE_ENV === "test") ? ":memory:" : "./app/data.sqlite3";
 
@@ -36,3 +37,5 @@ module.exports.getDb = function()
 {
 	return _db;
 };
+
+module.exports.setupCommands = setupCommands;

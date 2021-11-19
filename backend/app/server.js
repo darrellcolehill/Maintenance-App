@@ -1,16 +1,16 @@
 const config = require("./config");
 const app = require(".");
-const { openDb } = require("./db");
+const { openDb, setupCommands } = require("./database");
 
 openDb()
 	.then((db) => 
 	{
 		console.log("Successfully opened database connection!");
-		db.run("CREATE TABLE IF NOT EXISTS users (username STRING, password STRING, email STRING)")
-			.then(() => 
-			{
-				console.log("Created users table if it wasn't there before");
-			});
+		setupCommands.forEach(async cmd => 
+		{
+			await db.run(cmd);
+		});
+		console.log("Ran commands for database setup");
 	})
 	.catch(error => 
 	{

@@ -31,10 +31,11 @@ app.get("/", (_req, res) =>
 // simple login-required route for testing
 app.get("/secret",
 	jwt({ secret: config.jwtSecret, algorithms: ["HS256"] }),
-	function(req, res) 
+	function (req, res) 
 	{
-		res.status(200).json({message: "You have passed the authentication!"});
+		res.status(200).json({ message: "You have passed the authentication!" });
 	});
+
 // sends client a simple JSON response when a request errors out
 app.use(handleError);
 
