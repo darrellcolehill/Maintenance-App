@@ -16,8 +16,8 @@ const URL = 'COPY SERVER URL HERE'; // NOTE: for some reason, fetch will not let
 
 // Parameters: plaintext username and plaintext password
 // Return:
-//  a) if successful, JSON data containing loginStatus and token
-//        (NOTE: login status will be either 'Successful' or 'SOME_ERROR_MESSAGE')
+//  a) if successful, JSON data containing message and token
+//        (NOTE: message will be either 'Successful' or 'SOME_ERROR_MESSAGE')
 //  b) if unsuccessful, null
 // Post-conditions: sets token value on client to token value sent from server
 export async function login(username, password) {
@@ -61,7 +61,7 @@ export async function login(username, password) {
 
 // Parameters: none (uses token stored on client after login)
 // Return:
-//  a) if successful, JSON data containing all inboxes for the user (data stored in inconversation)
+//  a) if successful, JSON data containing all inboxes for the user (data stored in inconversation) and message
         // NOTE: the inconversation table contains all the conversations (inboxes) that a given user is in,
         // and that particular inbox's key (user1, user2)
 //  b) if unsuccessful, null
@@ -110,8 +110,8 @@ export async function getInboxesByUsername() {
 
 // Parameters: recipient's username
 // Return:
-//  a) if successful, JSON data containing createInboxStatus
-//        (NOTE: createInboxStatus will be either 'Successful' or 'SOME_ERROR_MESSAGE')
+//  a) if successful, JSON data containing message  
+//        (NOTE: message will be either 'Successful' or 'SOME_ERROR_MESSAGE')
 //  b) if unsuccessful, null
 // Post-conditions: sets token value on client to token value sent from server
 export async function createInbox(recipientUsername) {
