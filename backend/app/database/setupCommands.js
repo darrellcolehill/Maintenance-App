@@ -9,6 +9,13 @@ module.exports = [
 		username STRING,
 		role STRING,
 		rating FLOAT(5,2)
+	)`,
+    
+    `CREATE TABLE IF NOT EXISTS messages (
+		sender STRING,
+		receiver STRING,
+		message STRING,
+        read BOOL
 	)`
 ];
 
@@ -26,4 +33,11 @@ module.exports = [
         role STRING,
         rating FLOAT(5,2)
     )`
+
+    `CREATE TABLE IF NOT EXISTS messages (
+		sender STRING,
+		receiver STRING,
+		message STRING,
+        read BOOL
+	)`
 */

@@ -25,11 +25,9 @@ exports.login = (req, res, next) =>
 				db.all("SELECT role, rating FROM roles WHERE username = ?", username)
 				.then(userRoles => 
 				{
-					console.log(userRoles); // TODO: delete after testing
 					
 					const tokenPayload = {
 						id: user.username,
-						roles: userRoles
 					};
 
 					const options = {
@@ -37,6 +35,7 @@ exports.login = (req, res, next) =>
 					};
 					return res.status(200).json({
 						token: jwt.sign(tokenPayload, jwtSecret, options),
+						roles: userRoles
 					});
 
 				});
