@@ -20,7 +20,6 @@ router.post("/makePost",
 		const author = req.user.username;
 
 		const db = getDb();
-		db.all("SELECT * from posts").then(posts => console.log(posts))
 		db.run(`INSERT INTO posts (
             PrivacyStatus,
             ClaimStatus,
