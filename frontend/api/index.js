@@ -10,7 +10,8 @@ function delay(ms) {
 
 
 
-const URL = 'http://1b11-76-78-236-214.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
+const URL = 'ADD URL HERE'; // NOTE: for some reason, fetch will not let you use local host
+
 
 
 // TODO: update response to also send role data and store role data in AsyncStorage
@@ -49,6 +50,7 @@ export async function login(username, password) {
           } catch (error) {
             console.log(error);
           }
+
 
 
         return json;
@@ -154,6 +156,7 @@ export async function getInboxesByUsername() {
 }
 
 
+
 // Parameters: recipient's username
 // Return:
 //  a) if successful, JSON data containing message  
@@ -162,7 +165,6 @@ export async function getInboxesByUsername() {
 // Post-conditions: sets token value on client to token value sent from server
 export async function createInbox(recipientUsername) {
 
-    const userToken = await AsyncStorage.getItem('token');
 
     try {
         const userToken = await AsyncStorage.getItem('token');
@@ -202,3 +204,74 @@ export async function createInbox(recipientUsername) {
 
     return null;
 }
+
+
+// Sends message to user specified
+// Returns: json data containing status information
+export async function sendMessage(receiver, message) {
+
+  try {
+      const userToken = await AsyncStorage.getItem('token');
+
+      const response = await fetch(URL + '/messaging/sendMessage', {
+
+         method: 'POST',
+         headers: {
+             'Accept': '*/*',  // It can be used to overcome cors errors
+             'Content-Type': 'application/json'
+           },
+           body: JSON.stringify({
+              sender: sender, 
+              receiverToken: userToken,
+              message: message 
+           })
+
+      });
+      const json = await response.json();
+      console.log(json); // TODO: delete after testing
+
+
+      return json;
+
+    } catch (error) {
+      console.error(error);
+    }
+
+    return null;
+}
+
+
+
+//
+// Returns: json data of messages where the current user is the receiver
+export async function getMessages() {
+
+  try {
+      const userToken = await AsyncStorage.getItem('token');
+
+      const response = await fetch(URL + '/messaging/getMessages', {
+
+         method: 'POST',
+         headers: {
+             'Accept': '*/*',  // It can be used to overcome cors errors
+             'Content-Type': 'application/json'
+           },
+           body: JSON.stringify({
+              token: userToken
+           })
+
+      });
+      const json = await response.json();
+      console.log(json); // TODO: delete after testing
+
+
+      return json;
+
+    } catch (error) {
+      console.error(error);
+    }
+
+    return null;
+}
+
+
