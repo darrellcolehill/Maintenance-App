@@ -3,12 +3,13 @@ process.env.NODE_ENV = "test";
 
 const app = require("../app");
 const request = require("supertest");
+const assert = require("assert");
 const dbHandler = require("./db-handler");
 
 let testuser = {};
 testuser.username = "musa";
 testuser.password = "53cur3";
-testuser.email = "musa@53cur3.gov"
+testuser.email = "musa@53cur3.gov";
 
 describe("Signup route", () => 
 {
@@ -114,5 +115,20 @@ describe("A route that requires a valid authorization token", () =>
 			.get("/secret")
 			.set("Authorization", "Bearer " + token)
 			.expect(200, done);
+	});
+
+	it("recognizes the user from the token", (done) =>
+	{
+		request(app)
+			.get("/secret")
+			.set("Authorization", "Bearer " + token)
+			.expect(200)
+			.expect((res) => 
+			{
+				assert.equal(res.body.username, testuser.username);
+				// console.log(res.body)
+				// request.
+			})
+			.end(done);
 	});
 });

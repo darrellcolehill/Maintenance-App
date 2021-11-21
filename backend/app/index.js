@@ -33,7 +33,17 @@ app.get("/secret",
 	jwt({ secret: config.jwtSecret, algorithms: ["HS256"] }),
 	function (req, res) 
 	{
-		res.status(200).json({ message: "You have passed the authentication!" });
+		const db = require("./database").getDb();
+		db.get("SELECT username FROM users WHERE users.id = ?",
+			[req.user.id])
+			.then(user => 
+			{
+				res.status(200).json({
+					message: "Welcome to the secret area!",
+					username: user.username
+				});
+			});
+
 	});
 
 // sends client a simple JSON response when a request errors out
