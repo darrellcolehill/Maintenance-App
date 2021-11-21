@@ -10,7 +10,7 @@ function delay(ms) {
 
 
 
-const URL = 'http://d0d8-76-78-236-214.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
+const URL = 'ADD URL HERE'; // NOTE: for some reason, fetch will not let you use local host
 
 
 // TODO: update response to also send role data and store role data in AsyncStorage
