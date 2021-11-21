@@ -3,6 +3,7 @@ const express = require("express"),
 const cors = require("cors");
 const config = require("./config.json");
 const authRoutes = require("./auth/routes");
+const postRoutes = require("./posts/routes");
 const jwt = require("express-jwt");
 const handleError = require("./middlewares/errorHandler");
 const logger = require("morgan");
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // set up routes
 app.use("/auth", authRoutes);
+app.use("/posts", postRoutes);
 
 // simple route for testing
 app.get("/", (_req, res) => 
