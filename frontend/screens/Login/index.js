@@ -12,10 +12,12 @@ import { AuthStore } from "../../stores/auth";
 import * as Api from "../../api";
 
 function Login({ navigation }) {
+
   async function submitLogin(username, password) {
     AuthStore.startLoading();
     let response = await Api.login(username, password);
     let token = response.token;
+
     AuthStore.stopLoading();
 
     AuthStore.login(username, token);

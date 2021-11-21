@@ -10,10 +10,10 @@ function delay(ms) {
 
 
 
-const URL = 'COPY SERVER URL HERE'; // NOTE: for some reason, fetch will not let you use local host
+const URL = 'http://d0d8-76-78-236-214.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
 
 
-
+// TODO: update response to also send role data and store role data in AsyncStorage
 // Parameters: plaintext username and plaintext password
 // Return:
 //  a) if successful, JSON data containing message and token
@@ -24,7 +24,7 @@ export async function login(username, password) {
 
     try {
         //console.log(username + " " + password);
-        const response = await fetch(URL + '/login', {
+        const response = await fetch(URL + '/auth/login', {
 
            method: 'POST',
            headers: {
@@ -48,6 +48,49 @@ export async function login(username, password) {
           } catch (error) {
             console.log(error);
           }
+        return json;
+
+      } catch (error) {
+        console.error(error);
+      }
+
+      return null;
+}
+
+
+
+// Parameters: plaintext username and plaintext password boolean isTenant, isLandlord, isHandyman, and isHomeowner
+// Return:
+//  a) if successful, JSON data containing message and token
+//        (NOTE: message will be either 'Successful' or 'SOME_ERROR_MESSAGE')
+//  b) if unsuccessful, null
+// Post-conditions: sets token value on client to token value sent from server
+export async function signup(username, password, email, isTenant, isLandlord, isHandyman, isHomeowner) {
+
+    try {
+        //console.log(username + " " + password);
+        const response = await fetch(URL + '/auth/signup', {
+
+           method: 'POST',
+           headers: {
+               'Accept': '*/*',  // It can be used to overcome cors errors
+               'Content-Type': 'application/json'
+             },
+             body: JSON.stringify({
+               username: username,
+               password: password,
+               email: email,
+               isTenant: isTenant,
+               isLandlord: isLandlord,
+               isHandyman: isHandyman,
+               isHomeowner: isHomeowner
+             })
+
+        });
+        const json = await response.json();
+        console.log(json); // TODO: delete after testing
+
+
         return json;
 
       } catch (error) {
