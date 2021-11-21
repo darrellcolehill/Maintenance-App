@@ -10,16 +10,17 @@ function delay(ms) {
 
 
 
-const URL = 'ADD URL HERE'; // NOTE: for some reason, fetch will not let you use local host
+const URL = 'http://1b11-76-78-236-214.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
 
 
 // TODO: update response to also send role data and store role data in AsyncStorage
 // Parameters: plaintext username and plaintext password
 // Return:
-//  a) if successful, JSON data containing message and token
+//  a) if successful, JSON data containing message, token (for user validation), and roles
 //        (NOTE: message will be either 'Successful' or 'SOME_ERROR_MESSAGE')
+//        (NOTE: token now contains the users username, and role information)
 //  b) if unsuccessful, null
-// Post-conditions: sets token value on client to token value sent from server
+// Post-conditions: stores token and roles on client side using asyncStorage
 export async function login(username, password) {
 
     try {
@@ -48,6 +49,8 @@ export async function login(username, password) {
           } catch (error) {
             console.log(error);
           }
+
+
         return json;
 
       } catch (error) {
