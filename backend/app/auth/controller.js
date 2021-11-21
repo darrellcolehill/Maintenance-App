@@ -45,7 +45,9 @@ exports.login = (req, res, next) =>
 
 exports.signup = (req, res, next) => 
 {
-	const { username, password, email } = req.body;
+	const {username, password, email, isTenant, isLandlord, isHandyman, isHomeowner} = req.body;
+
+
 	if (!username || !password || !email) 
 	{
 		return res.status(400).json({
@@ -65,6 +67,8 @@ exports.signup = (req, res, next) =>
 				)
 					.then(() => 
 					{
+						// TODO: INSERT INTO ROLES TABLE HERE
+
 						return res.status(200).json({
 							message: "Successfully signed up!"
 						});
