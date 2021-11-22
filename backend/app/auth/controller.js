@@ -20,15 +20,27 @@ exports.login = (req, res, next) =>
 		{
 			if (user && password === user.password) 
 			{
-				const payload = {
-					id: user.id
-				};
-				const options = {
-					expiresIn: "24 hours"
-				};
-				return res.status(200).json({
-					token: jwt.sign(payload, jwtSecret, options)
+
+				// get role data for specified user
+				db.all("SELECT role, rating FROM roles WHERE username = ?", username)
+				.then(userRoles => 
+				{
+					
+					const tokenPayload = {
+						id: user.username,
+					};
+
+					const options = {
+						expiresIn: "24 hours"
+					};
+					return res.status(200).json({
+						token: jwt.sign(tokenPayload, jwtSecret, options),
+						roles: userRoles
+					});
+
 				});
+
+				
 			}
 			else 
 			{
@@ -45,8 +57,15 @@ exports.login = (req, res, next) =>
 
 exports.signup = (req, res, next) => 
 {
-	const { username, password, email } = req.body;
-	if (!username || !password || !email) 
+	const {username, password, email, isTenant, isLandlord, isHandyman, isHomeowner} = req.body;
+
+	// Array that will be used to help with inserting the user choosen roles
+	var roles = [{setRole: isTenant, value: "TENANT"}, {setRole: isLandlord, value: "LANDLORD"}, 
+				{setRole: isHandyman, value: "HANDYMAN"}, {setRole: isHomeowner, value: "HOMEOWNER"}];
+
+	console.log(roles);
+
+	if (!username || !password || !email) // Ensures that required fields exist
 	{
 		return res.status(400).json({
 			message: "Missing username or password"
@@ -57,7 +76,7 @@ exports.signup = (req, res, next) =>
 	db.get("SELECT (rowid) FROM users WHERE username = ?", username)
 		.then(user => 
 		{
-			if (!user) 
+			if (!user) // Make sure username not taken
 			{
 				db.run(
 					"INSERT INTO users (username, password, email) VALUES (?, ?, ?)",
@@ -65,6 +84,23 @@ exports.signup = (req, res, next) =>
 				)
 					.then(() => 
 					{
+						// inserts user choosen roles into roles database
+						for(var i = 0; i < roles.length; i++)
+						{
+							if(roles[i].setRole == true)
+							{
+								db.run(
+									"INSERT INTO roles (username, role, rating) VALUES (?, ?, ?)",
+									[username, roles[i].value, 0.0]
+								)
+								.catch(error => 
+								{
+									return next(error);
+								})
+							}
+								
+						}
+
 						return res.status(200).json({
 							message: "Successfully signed up!"
 						});

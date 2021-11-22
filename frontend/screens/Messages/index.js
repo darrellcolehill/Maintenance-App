@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   TouchableOpacity,
@@ -8,6 +8,19 @@ import {
 } from "react-native";
 import { data } from "./sampleData";
 import { List, FAB } from 'react-native-paper';
+import * as Api from "../../api";
+
+
+
+
+
+
+
+
+
+
+
+
 
 // renders each item in the list of messages
 function MessageItem({ item, onPress }) {
@@ -15,17 +28,32 @@ function MessageItem({ item, onPress }) {
 
   return (
     <TouchableOpacity onPress={onPress} style={[styles.item]}>
-      <List.Item
-        title={`From ${sender}`}
-        description={message}
-        left={props => <List.Icon {...props} icon="message" />}
-      />
+
+     <List.Item
+         title={item.sender}
+         description={message}
+         left={props => <List.Icon {...props} icon="folder" />}
+       />
+
     </TouchableOpacity>
   );
 }
 
+
+
 // renders the messages screen with a list of messages
 export function Messages({ navigation }) {
+
+  const [messageData, setMessageData] = useState([]);
+
+      const getMessages = async () => {
+
+          let response = await Api.getMessages();
+
+          setMessageData(response.messages);
+        }
+
+
   const renderItem = ({ item }) => {
     return (
       <MessageItem
@@ -35,12 +63,18 @@ export function Messages({ navigation }) {
     );
   };
 
+
+  useEffect(() => {
+      getMessages();
+  }, []);
+
+
   return (
     <View style={styles.container}>
       <FlatList
-        data={data}
+        data={messageData}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
       />
       <FAB 
         style={styles.fab}
@@ -50,6 +84,8 @@ export function Messages({ navigation }) {
     </View>
   );
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -70,3 +106,74 @@ const styles = StyleSheet.create({
     bottom: 0,
   }
 });
+
+
+
+
+
+
+
+// function to get and console.log message data for particular user
+/*
+      const [messageData, setMessageData] = useState();
+
+      const getMessages = async () => {
+
+          let response = await Api.getMessages();
+
+          await setMessageData(response);
+
+          console.log("===========================MESSAGES HERE===========================")
+          await console.log(messageData.messages);
+        }
+
+*/
+
+
+
+
+
+
+
+
+
+
+// RENDERS A BASIC BITCH VERSION OF THE MESSAGES FOR THE USER
+/*
+// renders the messages screen with a list of messages
+export function Messages({ navigation }) {
+
+  const [messageData, setMessageData] = useState([]);
+
+    const getMessages = async () => {
+
+        let response = await Api.getMessages();
+
+        setMessageData(response.messages);
+      }
+
+   const renderItem = ({ item }) => {
+       return (
+         <Text>
+           {item.message}
+         </Text>
+       );
+     };
+
+  useEffect(() => {
+    getMessages();
+  }, []);
+
+  return (
+    <View>
+        {messageData && (
+                <FlatList
+                  data={messageData}
+                  renderItem={renderItem}
+                  keyExtractor={(item) => item.id.toString()}
+                />
+              )}
+    </View>
+  );
+}
+*/
