@@ -206,6 +206,7 @@ export async function createInbox(recipientUsername) {
 }
 
 
+
 // Sends message to user specified
 // Returns: json data containing status information
 export async function sendMessage(receiver, message) {
@@ -262,7 +263,7 @@ export async function getMessages() {
 
       });
       const json = await response.json();
-      console.log(json); // TODO: delete after testing
+      //console.log(json); // TODO: delete after testing
 
 
       return json;
