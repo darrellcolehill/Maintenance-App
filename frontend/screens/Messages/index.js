@@ -16,7 +16,7 @@ function MessageItem({ item, onPress }) {
   return (
     <TouchableOpacity onPress={onPress} style={[styles.item]}>
       <List.Item
-        title={`From: ${sender}`}
+        title={`From ${sender}`}
         description={message}
         left={props => <List.Icon {...props} icon="message" />}
       />
