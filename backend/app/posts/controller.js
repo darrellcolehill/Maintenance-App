@@ -40,3 +40,38 @@ exports.makePost = (req, res, next) =>
 			return next(error);
 		});
 };
+
+/**
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+exports.search = (req, res, next) => 
+{
+	const { location } = req.body;
+
+	// Finding the user's role
+	let userRole;
+	const db = getDb();
+	db.run("SELECT (role) FROM roles WHERE username=?", req.user.username)
+		.then(row => 
+		{
+			userRole = row.role;
+		});
+
+	let query = "SELECT * FROM posts WHERE location=?", args = [location];
+	
+	// Restrict to public posts if user is not a handyman
+	if (userRole !== "handyman") 
+		query = `${query} AND PrivacyStatus='public'`;
+
+	db.all(query, args)
+		.then(rows => 
+		{
+			res.status(200).send(rows);
+		})
+		.catch ((error) => 
+		{
+			return next(error);
+		});
+};

@@ -15,4 +15,9 @@ router.post("/makePost",
 	posts.makePost
 );
 
+router.get("/search",
+	jwt({ secret: config.jwtSecret, algorithms: ["HS256"] }),
+	posts.search
+);
+
 module.exports = router;
