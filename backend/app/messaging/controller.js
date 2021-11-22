@@ -66,7 +66,7 @@ exports.getMessages = (req, res, next) =>
     db.all("SELECT (rowid) AS id, sender, receiver, message, read FROM messages WHERE receiver = ?", userToken.id)
     .then(messages => 
     {
-
+        console.log(messages);
         return res.status(200).json({
             messages: messages
         });
