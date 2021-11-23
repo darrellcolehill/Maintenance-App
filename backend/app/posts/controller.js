@@ -33,7 +33,9 @@ exports.makePost = (req, res, next) =>
 		location])
 		.then(() => 
 		{
-			res.status(200).send();
+			res.status(200).send({
+				message: "Successfully added post!"
+			});
 		})
 		.catch((error) => 
 		{
