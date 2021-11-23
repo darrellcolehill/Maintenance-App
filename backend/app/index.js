@@ -8,6 +8,9 @@ const jwt = require("express-jwt");
 const handleError = require("./middlewares/errorHandler");
 const logger = require("morgan");
 
+// workaround to prevent 304 responses
+app.disable("etag");
+
 // log requests to console
 app.use(logger("dev", { skip: () => process.env.NODE_ENV === "test" }));
 
