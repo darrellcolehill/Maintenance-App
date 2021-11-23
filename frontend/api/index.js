@@ -10,7 +10,7 @@ function delay(ms) {
 
 
 
-const URL = 'ADD URL HERE'; // NOTE: for some reason, fetch will not let you use local host
+const URL = 'http://8580-76-78-236-214.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
 
 
 
@@ -42,14 +42,18 @@ export async function login(username, password) {
         const json = await response.json();
         console.log(json); // TODO: delete after testing
 
-        try {
-            await AsyncStorage.setItem(
-              'token',
-              json.token
-            );
-          } catch (error) {
-            console.log(error);
-          }
+
+        if(json.token)
+        {
+            try {
+                await AsyncStorage.setItem(
+                  'token',
+                  json.token
+                );
+              } catch (error) {
+                console.log(error);
+              }
+        }
 
 
 
@@ -107,112 +111,13 @@ export async function signup(username, password, email, isTenant, isLandlord, is
 
 
 
-// Parameters: none (uses token stored on client after login)
-// Return:
-//  a) if successful, JSON data containing all inboxes for the user (data stored in inconversation) and message
-        // NOTE: the inconversation table contains all the conversations (inboxes) that a given user is in,
-        // and that particular inbox's key (user1, user2)
-//  b) if unsuccessful, null
-export async function getInboxesByUsername() {
-
-    const userToken = await AsyncStorage.getItem('token');
-
-    try {
-        const userToken = await AsyncStorage.getItem('token');
-        if (userToken !== null) {
-          // We have data!!
-          console.log("Token found");
-
-           try {
-                   const response = await fetch(URL + '/inboxDisplay', {
-
-                      method: 'POST',
-                      headers: {
-                          'Accept': '*/*',  // It can be used to overcome cors errors
-                          'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                          token: userToken
-                        })
-
-                   });
-                   const json = await response.json();
-                   console.log(json); // TODO: delete after testing
-                   return json;
-
-                 }
-                 catch (error) {
-                   console.error(error);
-                 }
-
-            }
-        }
-       catch (error) {
-        // Error retrieving data
-        console.log("Token not found");
-      }
-
-    return null;
-}
-
-
-
-// Parameters: recipient's username
-// Return:
-//  a) if successful, JSON data containing message  
-//        (NOTE: message will be either 'Successful' or 'SOME_ERROR_MESSAGE')
-//  b) if unsuccessful, null
-// Post-conditions: sets token value on client to token value sent from server
-export async function createInbox(recipientUsername) {
-
-
-    try {
-        const userToken = await AsyncStorage.getItem('token');
-        if (userToken !== null) {
-          // We have data!!
-          console.log("Token found");
-
-           try {
-                   const response = await fetch(URL + '/createInbox', {
-
-                      method: 'POST',
-                      headers: {
-                          'Accept': '*/*',  // It can be used to overcome cors errors
-                          'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                          token: userToken,
-                          username: recipientUsername
-                        })
-
-                   });
-                   const json = await response.json();
-                   console.log(json); // TODO: delete after testing
-                   return json;
-
-                 }
-                 catch (error) {
-                   console.error(error);
-                 }
-
-            }
-        }
-       catch (error) {
-        // Error retrieving data
-        console.log("Token not found");
-      }
-
-    return null;
-}
-
-
-
 // Sends message to user specified
 // Returns: json data containing status information
 export async function sendMessage(receiver, message) {
 
   try {
       const userToken = await AsyncStorage.getItem('token');
+      console.log("sender token = " + userToken);
 
       const response = await fetch(URL + '/messaging/sendMessage', {
 
@@ -222,8 +127,8 @@ export async function sendMessage(receiver, message) {
              'Content-Type': 'application/json'
            },
            body: JSON.stringify({
-              sender: sender, 
-              receiverToken: userToken,
+              sender: userToken,
+              receiver: receiver,
               message: message 
            })
 
