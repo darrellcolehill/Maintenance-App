@@ -9,6 +9,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Home } from "../screens/Home";
+import { NewPost } from "../screens/Home/NewPost";
+import { PostContent } from "../screens/Home/PostContent";
 import { Messages } from "../screens/Messages";
 import { MessageContent } from "../screens/Messages/MessageContent";
 import { NewMessage } from "../screens/Messages/NewMessage"
@@ -21,6 +23,8 @@ function HomeNav() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="New post" component={NewPost} />
+      <Stack.Screen name="Post content" component={PostContent} />
     </Stack.Navigator>
   );
 }
