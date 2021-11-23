@@ -12,7 +12,9 @@ exports.sendMessage = (req, res, next) =>
 
     // NOTE: may have to convert the string containing the token to a json file, since
     // Asyncstorage is storing the string as a character??
-    var userToken = jwt.verify(req.body.token, jwtSecret);
+    var userToken = jwt.verify(req.body.sender, jwtSecret);
+    
+    //console.log(userToken);
     
     const {receiver, message} = req.body;
 
@@ -24,21 +26,41 @@ exports.sendMessage = (req, res, next) =>
     }
 
 
-    // Inserts the new message into the database.
     const db = getDb();
-    db.all(
-        "INSERT INTO messages (sender, receiver, message, read) VALUES (?, ?, ?, ?)",
-        [userToken.id, receiver, message, 0]
+
+    // check if the receiver exist here and return error if they do not
+    db.get(
+        "SELECT username FROM users WHERE username = ?",
+        receiver
     )
-    .catch(error => 
+    .then(data => 
     {
-        return next(error);
-    })
+        if(!data)
+        {
+            return res.status(400).json({
+                message: "receiver does not exist"
+            });
+        }
+        else
+        {
+             // Inserts the new message into the database.
+            db.all(
+                "INSERT INTO messages (sender, receiver, message, read) VALUES (?, ?, ?, ?)",
+                [userToken.id, receiver, message, 0]
+            )
+            .catch(error => 
+            {
+                return next(error);
+            })
+
+            return res.status(400).json({
+                message: "Successful"
+            });
+        }
+
+    });
     
 
-    return res.status(200).json({
-        message: "Successful"
-    });
 };
 
 
@@ -66,7 +88,8 @@ exports.getMessages = (req, res, next) =>
     db.all("SELECT (rowid) AS id, sender, receiver, message, read FROM messages WHERE receiver = ?", userToken.id)
     .then(messages => 
     {
-        console.log(messages);
+        //console.log(messages);
+        
         return res.status(200).json({
             messages: messages
         });
