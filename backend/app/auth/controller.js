@@ -21,7 +21,8 @@ exports.login = (req, res, next) =>
 			if (user && password === user.password) 
 			{
 				const payload = {
-					id: user.id
+					id: user.id,
+					username: user.username
 				};
 				const options = {
 					expiresIn: "24 hours"
