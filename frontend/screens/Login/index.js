@@ -40,7 +40,7 @@ function Login({ navigation }) {
           onPress={() => submitLogin(username, password)}
           activeOpacity={0.8}
         >
-          <Text style={styles.textFonts}>Login</Text>
+          <Text style={styles.textFonts}>LOGIN</Text>
         </TouchableOpacity>
 
         <TouchableOpacity // register account element
@@ -48,7 +48,7 @@ function Login({ navigation }) {
           onPress={() => navigation.navigate("Signup")}
           activeOpacity={0.8}
         >
-          <Text style={styles.textFonts}>Register for a new account!</Text>
+          <Text style={styles.textFonts}>REGISTER ACCOUNT</Text>
         </TouchableOpacity>
 
         <TextInput // username box element
@@ -124,6 +124,8 @@ const styles = StyleSheet.create({
   },
   textFonts: {
     fontSize: 25,
+    fontWeight: 'bold',
+    color: 'white',
   },
 });
 
