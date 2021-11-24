@@ -10,7 +10,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Home } from "../screens/Home";
 import { CreatePost } from "../screens/Home/CreatePost";
-import { NewPost } from "../screens/Home/NewPost";
 import { PostContent } from "../screens/Home/PostContent";
 import { Messages } from "../screens/Messages";
 import { MessageContent } from "../screens/Messages/MessageContent";

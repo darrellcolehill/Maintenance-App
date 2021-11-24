@@ -10,18 +10,6 @@ import { data } from "./sampleData";
 import { List, FAB } from 'react-native-paper';
 import * as Api from "../../api";
 
-
-
-
-
-
-
-
-
-
-
-
-
 // renders each item in the list of messages
 function MessageItem({ item, onPress }) {
   const { message, sender } = item;
@@ -47,7 +35,7 @@ export function Messages({ navigation }) {
   const [messageData, setMessageData] = useState([]);
 
       const getMessages = async () => {
-
+        
           let response = await Api.getMessages();
 
           setMessageData(response.messages);

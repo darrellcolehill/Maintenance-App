@@ -46,7 +46,7 @@ exports.sendMessage = (req, res, next) =>
              // Inserts the new message into the database.
             db.all(
                 "INSERT INTO messages (sender, receiver, message, read) VALUES (?, ?, ?, ?)",
-                [userToken.id, receiver, message, 0]
+                [userToken.username, receiver, message, 0]
             )
             .catch(error => 
             {
@@ -85,7 +85,7 @@ exports.getMessages = (req, res, next) =>
     
     // Inserts the new message into the database.
     const db = getDb();
-    db.all("SELECT (rowid) AS id, sender, receiver, message, read FROM messages WHERE receiver = ?", userToken.id)
+    db.all("SELECT (rowid) AS id, sender, receiver, message, read FROM messages WHERE receiver = ?", userToken.username)
     .then(messages => 
     {
         //console.log(messages);
