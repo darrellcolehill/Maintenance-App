@@ -14,7 +14,7 @@ function SignupForm() {
       <TextInput placeholder="Password" />
       <Checkbox.Item label="Item" status="checked" onPress = {() => console.log()} />
       <Button mode="contained" icon="plus-circle">
-        Sign up
+        <Text>Sign up</Text>
       </Button>
     </>
   );
