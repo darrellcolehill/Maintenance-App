@@ -22,7 +22,7 @@ export function Home({ navigation }) {
         <TouchableOpacity 
         style={styles.postButton}
         activeOpacity={0.8}
-        onPress={() => navigation.navigation("CreatePost")}>
+        onPress={() => navigation.navigate("Create a Post")}>
           <Image source={require("../../assets/createPostImg.png")}
                  style={styles.postImage}>
           </Image>

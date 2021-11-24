@@ -9,6 +9,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Home } from "../screens/Home";
+import { CreatePost } from "../screens/Home/CreatePost";
 import { Messages } from "../screens/Messages";
 import { MessageContent } from "../screens/Messages/MessageContent";
 import { NewMessage } from "../screens/Messages/NewMessage"
@@ -23,6 +24,7 @@ function HomeNav() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Create a Post" component={CreatePost}/>
     </Stack.Navigator>
   );
 }
@@ -48,7 +50,7 @@ function ProfileNav() {
 function LandlordFeedNav() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="LandlordFeed" component={LandlordFeed} />
+      <Stack.Screen name="Personalized Feed" component={LandlordFeed} />
     </Stack.Navigator>
   );
 }
