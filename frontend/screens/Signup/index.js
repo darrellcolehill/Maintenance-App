@@ -37,7 +37,7 @@ function Signup({ navigation }) {
       <Title>Welcome, new user!</Title>
 
             <TextInput placeholder="Username" onChangeText={text => setUsername(text)} />
-            <TextInput placeholder="Password" onChangeText={text => setPassword(text)} />
+            <TextInput secureTextEntry={true} placeholder="Password" onChangeText={text => setPassword(text)} />
             <TextInput placeholder="Email" onChangeText={text => setEmail(text)} />
 
             <Text>Please check which role(s) you would like to have access to</Text>
@@ -47,11 +47,11 @@ function Signup({ navigation }) {
             <Checkbox.Item label="Homeowner" status={isHomeowner ? 'checked' : 'unchecked'} onPress={() => { setHomeowner(!isHomeowner);}} />
 
             <Button mode="contained" icon="plus-circle" onPress={() => submitSignup(username, password, email, isTenant, isLandlord, isHandyman, isHomeowner)}>
-              Sign up
+              <Text style={styles.textFonts}>Sign up</Text>
             </Button>
 
       <Button mode="contained" onPress={() => navigation.navigate("Login")}>
-        Already have an account?
+      <Text style={styles.textFonts}>Already have an account?</Text>
       </Button>
     </View>
   );
@@ -63,6 +63,13 @@ const styles = StyleSheet.create({
     padding: 10,
     justifyContent: "center",
   },
+
+  textFonts: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+
 });
 
 export default Signup;
