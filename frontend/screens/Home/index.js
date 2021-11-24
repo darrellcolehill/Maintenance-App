@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { SearchBar } from "react-native-elements";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Text, Button } from "react-native-paper";
 import { AuthStore } from "../../stores/auth";
 
@@ -18,6 +18,12 @@ export function Home({ navigation }) {
         value={searchBar}
       />
 
+      <View style={styles.container}>
+        <TouchableOpacity style={styles.postButton}>
+          <Image>source={require("../../assets/createPostImg.png")}</Image>
+        </TouchableOpacity>
+      </View>
+
       <Text>Welcome, {username}!</Text>
       <Button onPress={() => AuthStore.logout()} mode="contained">
         Sign out
@@ -30,4 +36,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+
+  postButton: {
+    backgroundColor: 'slategray',
+    borderRadius: 8,
+  }
 });
