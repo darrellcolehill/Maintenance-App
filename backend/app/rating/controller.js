@@ -88,8 +88,11 @@ exports.getUserRatings = (req, res, next) =>
 exports.giveUserRatings = (req, res, next) => 
 {
     const requestedUser = req.body.requestedUser;
-    const rating = req.body.rating;
+    let rating = req.body.rating;
+    rating = parseInt(rating);
     const role = req.body.role;
+
+    
 
     if(!requestedUser || !rating || !role)
     {
@@ -97,6 +100,10 @@ exports.giveUserRatings = (req, res, next) =>
 			message: "Missing input requested user, rating, or rating"
 		});
     }
+
+
+    const db = getDb();
+
 
     db.get(
         "SELECT rating, role, numRatings, sumOfRatings FROM roles WHERE username = ? AND role = ?",
@@ -107,15 +114,15 @@ exports.giveUserRatings = (req, res, next) =>
         if(!data)
         {
             return res.status(200).json({
-                ratings: data,
                 message: "Requested user not found"
             });
         }
         else
         {
             // Calculate new rating
-            let newSumOfRatings = data.sumOfRatings + rating;
-            let newNumRatings = data.numRatings + 1;
+            let newSumOfRatings = parseInt(data.sumOfRatings) + rating;
+
+            let newNumRatings = parseInt(data.numRatings) + 1;
             let newRating = ((newSumOfRatings) / (newNumRatings));
 
             /*
@@ -125,25 +132,18 @@ exports.giveUserRatings = (req, res, next) =>
                 WHERE
                     search_condition 
             */
-
-            db.run("UPDATE roles SET sumOfRatings = ?, numRatings = ?, rating = ?, WHERE username = ? AND role = ?", 
-                    [newSumOfRatings, newNumRatings, newRating, username, role], function(err){
-                        
-                    if(err)
-                    {
-                        return res.status(200).json({
-                            message: "Unsuccessful"
-                        });
-                    }
-                    else
-                    {
-                        return res.status(200).json({
-                            message: "Successful"
-                        });
-                    }
-            });
+                    
+            db.run("UPDATE roles SET sumOfRatings = ?, numRatings = ?, rating = ? WHERE username = ? AND role = ?", 
+                    [newSumOfRatings, newNumRatings, newRating, requestedUser, role])
+            .then(data => {
+                console.log(data);
+            })
                       
-
+            return res.status(200).json({
+                ratings: data,
+                message: "Successful"
+            });
+            
         }
 
     });

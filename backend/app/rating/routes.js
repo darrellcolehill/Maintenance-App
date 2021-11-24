@@ -23,7 +23,7 @@ router.post("/getUserRatings", rating.getUserRatings);
 * on success, 
 */
 // Get another user's ratings for displaying on user search
-router.post("/giveUserRatings", rating.getUserRatings);
+router.post("/giveUserRatings", rating.giveUserRatings);
 
 
 
