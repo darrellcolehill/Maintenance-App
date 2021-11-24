@@ -132,14 +132,12 @@ exports.giveUserRatings = (req, res, next) =>
                     if(err)
                     {
                         return res.status(200).json({
-                            ratings: data,
                             message: "Unsuccessful"
                         });
                     }
                     else
                     {
                         return res.status(200).json({
-                            ratings: data,
                             message: "Successful"
                         });
                     }
