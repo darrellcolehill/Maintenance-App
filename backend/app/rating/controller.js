@@ -91,10 +91,10 @@ exports.giveUserRatings = (req, res, next) =>
     const rating = req.body.rating;
     const role = req.body.role;
 
-    if(!requestedUser || !rating)
+    if(!requestedUser || !rating || !role)
     {
         return res.status(400).json({
-			message: "Missing input requested user or rating"
+			message: "Missing input requested user, rating, or rating"
 		});
     }
 
@@ -114,20 +114,40 @@ exports.giveUserRatings = (req, res, next) =>
         else
         {
             // Calculate new rating
-            let newRating = ((data.sumOfRatings + rating) / (data.numRatings + 1));
+            let newSumOfRatings = data.sumOfRatings + rating;
+            let newNumRatings = data.numRatings + 1;
+            let newRating = ((newSumOfRatings) / (newNumRatings));
 
-            // TODO: Update numRatings
+            /*
+                UPDATE table
+                SET column_1 = new_value_1,
+                    column_2 = new_value_2
+                WHERE
+                    search_condition 
+            */
 
-            // TODO: Update sumOfRatings
+            db.run("UPDATE roles SET sumOfRatings = ?, numRatings = ?, rating = ?, WHERE username = ? AND role = ?", 
+                    [newSumOfRatings, newNumRatings, newRating, username, role], function(err){
+                        
+                    if(err)
+                    {
+                        return res.status(200).json({
+                            ratings: data,
+                            message: "Unsuccessful"
+                        });
+                    }
+                    else
+                    {
+                        return res.status(200).json({
+                            ratings: data,
+                            message: "Successful"
+                        });
+                    }
+            });
+                      
 
         }
 
-        /*
-        return res.status(200).json({
-            ratings: data,
-            message: "Successful"
-        });
-        */
     });
 
 };
