@@ -98,7 +98,7 @@ exports.giveUserRatings = (req, res, next) =>
 		});
     }
 
-    db.all(
+    db.get(
         "SELECT rating, role, numRatings, sumOfRatings FROM roles WHERE username = ? AND role = ?",
         [requestedUser,role]
     )
@@ -114,7 +114,7 @@ exports.giveUserRatings = (req, res, next) =>
         else
         {
             // Calculate new rating
-            let newRating = (data.sumOfRatings + rating) / (data.numRatings + 1);
+            let newRating = ((data.sumOfRatings + rating) / (data.numRatings + 1));
 
             // TODO: Update numRatings
 
