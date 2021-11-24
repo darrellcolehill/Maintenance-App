@@ -11,17 +11,6 @@ import { List, FAB } from 'react-native-paper';
 import * as Api from "../../api";
 
 
-
-
-
-
-
-
-
-
-
-
-
 // renders each item in the list of messages
 function MessageItem({ item, onPress }) {
   const { message, sender } = item;
