@@ -23,7 +23,7 @@ const isLandlord = true;  // WILL NEED TO IMPLEMENT SERVER-SIDE CODE ONCE COMPLE
 function HomeNav() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Homepage" component={Home} />
       <Stack.Screen name="Create a Post" component={CreatePost}/>
     </Stack.Navigator>
   );
@@ -32,7 +32,7 @@ function HomeNav() {
 function MessagesNav() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Messages" component={Messages} />
+      <Stack.Screen name="Message Inbox" component={Messages} />
       <Stack.Screen name="Message content" component={MessageContent} />
       <Stack.Screen name="New message" component={NewMessage} />
     </Stack.Navigator>
@@ -42,7 +42,7 @@ function MessagesNav() {
 function ProfileNav() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="User Profile" component={Profile} />
     </Stack.Navigator>
   );
 }
