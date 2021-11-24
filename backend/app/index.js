@@ -4,6 +4,7 @@ const cors = require("cors");
 const config = require("./config.json");
 const authRoutes = require("./auth/routes");
 const messagingRoutes = require("./messaging/routes");
+const ratingRoutes = require("./rating/routes");
 const jwt = require("express-jwt");
 const handleError = require("./middlewares/errorHandler");
 const logger = require("morgan");
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 // set up routes
 app.use("/auth", authRoutes);
 app.use("/messaging", messagingRoutes);
+app.use("/rating", ratingRoutes);
 
 // simple route for testing
 app.get("/", (_req, res) => 

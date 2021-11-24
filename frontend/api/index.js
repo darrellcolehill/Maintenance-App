@@ -205,7 +205,7 @@ export async function getCurrentUserRatings() {
 
 
 // TODO: need to test
-export async function getUserRatings() {
+export async function getUserRatings(requestedUser) {
 
   try {
       
@@ -219,7 +219,8 @@ export async function getUserRatings() {
            'Content-Type': 'application/json'
          },
          body: JSON.stringify({
-            token: userToken
+            token: userToken,
+            requestedUser: requestedUser
          })
 
     });
@@ -236,4 +237,42 @@ export async function getUserRatings() {
   return null;
 
 }
+
+
+// TODO: need to test
+export async function giveUserRatings(requestedUser, rating, role) {
+
+  try {
+      
+    const userToken = AuthStore.token;
+
+    const response = await fetch(URL + '/rating/giveUserRatings', {
+
+       method: 'POST',
+       headers: {
+           'Accept': '*/*',  // It can be used to overcome cors errors
+           'Content-Type': 'application/json'
+         },
+         body: JSON.stringify({
+            token: userToken,
+            requestedUser: requestedUser,
+            rating: rating,
+            role: role
+         })
+
+    });
+    const json = await response.json();
+    console.log(json); // TODO: delete after testing
+
+
+    return json;
+
+  } catch (error) {
+    console.error(error);
+  }
+
+  return null;
+
+}
+
 

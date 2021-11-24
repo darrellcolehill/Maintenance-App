@@ -9,7 +9,8 @@ module.exports = [
 		username STRING,
 		role STRING,
 		rating FLOAT(5,2),
-		numRatings INT DEFAULT 0
+		numRatings INT DEFAULT 0,
+		sumOfRatings INT DEFAULT 0
 	)`,
     
     `CREATE TABLE IF NOT EXISTS messages (
