@@ -10,6 +10,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Home } from "../screens/Home";
 import { CreatePost } from "../screens/Home/CreatePost";
+import { NewPost } from "../screens/Home/NewPost";
+import { PostContent } from "../screens/Home/PostContent";
 import { Messages } from "../screens/Messages";
 import { MessageContent } from "../screens/Messages/MessageContent";
 import { NewMessage } from "../screens/Messages/NewMessage"
@@ -20,11 +22,13 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 const isLandlord = true;  // WILL NEED TO IMPLEMENT SERVER-SIDE CODE ONCE COMPLETE HERE!!!
 
+// TODO use name CreatePost instead of NewPost
 function HomeNav() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Homepage" component={Home} />
       <Stack.Screen name="Create a Post" component={CreatePost}/>
+      <Stack.Screen name="Post content" component={PostContent} />
     </Stack.Navigator>
   );
 }

@@ -4,11 +4,12 @@ const cors = require("cors");
 const config = require("./config.json");
 const authRoutes = require("./auth/routes");
 const messagingRoutes = require("./messaging/routes");
+const postRoutes = require("./posts/routes");
 const jwt = require("express-jwt");
 const handleError = require("./middlewares/errorHandler");
 const logger = require("morgan");
 
-// workaround to prevent 304 responses
+// workaround to disable empty responses with code 304
 app.disable("etag");
 
 // log requests to console
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 // set up routes
 app.use("/auth", authRoutes);
 app.use("/messaging", messagingRoutes);
+app.use("/posts", postRoutes);
 
 // simple route for testing
 app.get("/", (_req, res) => 

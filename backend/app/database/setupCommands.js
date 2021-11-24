@@ -11,12 +11,22 @@ module.exports = [
 		rating FLOAT(5,2)
 	)`,
     
-    `CREATE TABLE IF NOT EXISTS messages (
+	`CREATE TABLE IF NOT EXISTS messages (
 		sender STRING,
 		receiver STRING,
 		message STRING,
         read BOOL
-	)`
+	)`,
+
+	`CREATE TABLE IF NOT EXISTS posts (
+        PrivacyStatus INTEGER,
+        ClaimStatus INTEGER,
+        date TEXT,
+        image BLOB,
+        author TEXT,
+        caption TEXT,
+        location TEXT
+    )`
 ];
 
 
