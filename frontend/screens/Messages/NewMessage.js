@@ -25,7 +25,7 @@ export function NewMessage() {
       //AuthStore.stopLoading();
 
       //TODO: Also add user's role to AuthStore here
-      AuthStore.login(username, token);
+      //AuthStore.login(username, token);
   }
 
 

@@ -8,7 +8,8 @@ module.exports = [
 	`CREATE TABLE IF NOT EXISTS roles (
 		username STRING,
 		role STRING,
-		rating FLOAT(5,2)
+		rating FLOAT(5,2),
+		numRatings INT DEFAULT 0
 	)`,
     
     `CREATE TABLE IF NOT EXISTS messages (

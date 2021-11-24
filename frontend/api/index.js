@@ -10,7 +10,7 @@ function delay(ms) {
 
 
 
-const URL = 'http://d433-172-58-171-3.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
+const URL = 'ADD URL HERE'; // NOTE: for some reason, fetch will not let you use local host
 
 
 
