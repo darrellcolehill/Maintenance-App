@@ -19,11 +19,36 @@ function Login({ navigation }) {
 
     let response = await Api.login(username, password);
     let token = response.token;
+    let roles = response.roles;
+
+    let isLandlord = false; 
+    let isTenant = false; 
+    let isHandyman = false;
+    let isHomeowner = false;
+    
+    for(var i = 0; i < roles.length; i++)
+    {
+      if(roles[i].role == "LANDLORD")
+      {
+        isLandlord = true;
+      }
+      else if(roles[i].role == "TENANT")
+      {
+        isTenant = true;
+      }
+      else if(roles[i].role == "HANDYMAN")
+      {
+        isHandyman = true;
+      }
+      else
+      {
+        isHomeowner = true;
+      }
+    }
+
+    AuthStore.login(username, token, isLandlord, isTenant, isHandyman, isHomeowner);
 
     AuthStore.stopLoading();
-
-    //TODO: Also add user's role to AuthStore here
-    AuthStore.login(username, token);
   }
 
   let [username, setUsername] = useState("");

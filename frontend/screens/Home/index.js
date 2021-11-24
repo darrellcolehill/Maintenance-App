@@ -8,6 +8,7 @@ import { AuthStore } from "../../stores/auth";
 export function Home({ navigation }) {
   let username = AuthStore.username;
   let [searchBar, setSearchBar] = useState("");
+
   
   return (
     <View style={styles.container}>

@@ -3,6 +3,7 @@
  */
 
  import AsyncStorage from '@react-native-async-storage/async-storage';
+ import { AuthStore } from "../stores/auth";
 
 function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -10,11 +11,10 @@ function delay(ms) {
 
 
 
-const URL = 'ADD URL HERE'; // NOTE: for some reason, fetch will not let you use local host
+const URL = 'http://b953-73-23-154-60.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
 
 
 
-// TODO: update response to also send role data and store role data in AsyncStorage
 // Parameters: plaintext username and plaintext password
 // Return:
 //  a) if successful, JSON data containing message, token (for user validation), and roles
@@ -41,21 +41,6 @@ export async function login(username, password) {
         });
         const json = await response.json();
         console.log(json); // TODO: delete after testing
-
-
-        if(json.token)
-        {
-            try {
-                await AsyncStorage.setItem(
-                  'token',
-                  json.token
-                );
-              } catch (error) {
-                console.log(error);
-              }
-        }
-
-
 
         return json;
 
@@ -116,7 +101,9 @@ export async function signup(username, password, email, isTenant, isLandlord, is
 export async function sendMessage(receiver, message) {
 
   try {
-      const userToken = await AsyncStorage.getItem('token');
+
+      //const userToken = await AsyncStorage.getItem('token');         // TODO: REMOVE AFTER TESTING
+      const userToken = AuthStore.token;
       console.log("sender token = " + userToken);
 
       const response = await fetch(URL + '/messaging/sendMessage', {
@@ -130,6 +117,40 @@ export async function sendMessage(receiver, message) {
               sender: userToken,
               receiver: receiver,
               message: message 
+           })
+
+      });
+      const json = await response.json();
+      //console.log(json); // TODO: delete after testing
+
+      return json;
+
+    } catch (error) {
+      console.error(error);
+    }
+
+    return null;
+}
+
+
+
+//
+// Returns: json data of messages where the current user is the receiver
+export async function getMessages() {
+
+  try {
+      
+      const userToken = AuthStore.token;
+
+      const response = await fetch(URL + '/messaging/getMessages', {
+
+         method: 'POST',
+         headers: {
+             'Accept': '*/*',  // It can be used to overcome cors errors
+             'Content-Type': 'application/json'
+           },
+           body: JSON.stringify({
+              token: userToken
            })
 
       });
@@ -148,36 +169,71 @@ export async function sendMessage(receiver, message) {
 
 
 
-//
-// Returns: json data of messages where the current user is the receiver
-export async function getMessages() {
+// TODO: need to test
+export async function getCurrentUserRatings() {
 
   try {
-      const userToken = await AsyncStorage.getItem('token');
+      
+    const userToken = AuthStore.token;
 
-      const response = await fetch(URL + '/messaging/getMessages', {
+    const response = await fetch(URL + '/rating/getCurrentUserRatings', {
 
-         method: 'POST',
-         headers: {
-             'Accept': '*/*',  // It can be used to overcome cors errors
-             'Content-Type': 'application/json'
-           },
-           body: JSON.stringify({
-              token: userToken
-           })
+       method: 'POST',
+       headers: {
+           'Accept': '*/*',  // It can be used to overcome cors errors
+           'Content-Type': 'application/json'
+         },
+         body: JSON.stringify({
+            token: userToken
+         })
 
-      });
-      const json = await response.json();
-      //console.log(json); // TODO: delete after testing
+    });
+    const json = await response.json();
+    console.log(json); // TODO: delete after testing
 
 
-      return json;
+    return json;
 
-    } catch (error) {
-      console.error(error);
-    }
+  } catch (error) {
+    console.error(error);
+  }
 
-    return null;
+  return null;
+
 }
 
+
+
+// TODO: need to test
+export async function getUserRatings() {
+
+  try {
+      
+    const userToken = AuthStore.token;
+
+    const response = await fetch(URL + '/rating/getUserRating', {
+
+       method: 'POST',
+       headers: {
+           'Accept': '*/*',  // It can be used to overcome cors errors
+           'Content-Type': 'application/json'
+         },
+         body: JSON.stringify({
+            token: userToken
+         })
+
+    });
+    const json = await response.json();
+    console.log(json); // TODO: delete after testing
+
+
+    return json;
+
+  } catch (error) {
+    console.error(error);
+  }
+
+  return null;
+
+}
 

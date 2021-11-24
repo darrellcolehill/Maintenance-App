@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 import * as Api from "../../api";
+import { AuthStore } from "../../stores/auth";
 
 // the screen for composing a new message
 export function NewMessage() {
@@ -14,18 +15,16 @@ export function NewMessage() {
 
   async function sendMessage(recipient, content) {
 
-      //AuthStore.startLoading();
+      AuthStore.startLoading();
 
       let response = await Api.sendMessage(recipient, content);
 
-      // ADD NAVIGATION OR ALERT THAT MESSAGE IS SEND
-      //if(response.message == "Successful") navigation.navigate("Messages");
-      //else navigation.navigate("Signup");
+      //TODO: ADD NAVIGATION OR ALERT THAT MESSAGE IS SEND
+        //if(response.message == "Successful") navigation.navigate("Messages");
+        //else navigation.navigate("Signup");
 
-      //AuthStore.stopLoading();
+      AuthStore.stopLoading();
 
-      //TODO: Also add user's role to AuthStore here
-      //AuthStore.login(username, token);
   }
 
 
