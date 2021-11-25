@@ -25,24 +25,36 @@ function Login({ navigation }) {
 
   async function submitLogin(username, password) {
 
-    try{
       AuthStore.startLoading();
 
       let response = await Api.login(username, password);
-      if(response.message != null){ throw loginError }
 
-      let token = response.token;
+		if(response.token)
+		{
+			let {token, roles} = response;
+			// NOTE: roles is looks like [{"rating": x, "role": y}]
+			// so each "role" is actually a rating and a role
 
-      AuthStore.stopLoading();
+			AuthStore.stopLoading();
 
-      //TODO: Also add user's role to AuthStore here
-      AuthStore.login(username, token);
-      // AuthStore.setLandlord(token);      THIS LINE THROWS SOME ERROR IDK WHY BUT IT TRIGGERS THE POPUP I THINK I DIDN'T WORK W/ AUTHSTORE CORRECTLY
-    }catch(loginError){
-      console.log("Prevented unauthorized login")
-      AuthStore.stopLoading();
-      createOneButtonAlert();
-    }
+			AuthStore.login(username, token);
+
+			// checking if the user has a landlord role
+			let isLandlord = false;
+			roles.forEach(item => {
+				if (item.role == "LANDLORD")
+					isLandlord = true;
+			})
+
+			console.log(`${(isLandlord)?"Is":"Is not"} a landlord`)
+			AuthStore.setIsLandlord(isLandlord);
+		}
+			
+	  else{
+		  console.log("Prevented unauthorized login")
+		  AuthStore.stopLoading();
+		  createOneButtonAlert();
+	  }
   }
 
   let [username, setUsername] = useState("");

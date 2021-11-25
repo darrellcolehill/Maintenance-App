@@ -19,10 +19,9 @@ class AuthModel {
     makeAutoObservable(this);
   }
 
-  setLandlord(token) {
-    obj = JSON.parse(token);
-    if(obj.isLandlord == true){ this.isLandlord = true; }
-  }
+	setIsLandlord(value) {
+		this.isLandlord = value;
+	}
 
   startLoading() {
     this.loading = true;

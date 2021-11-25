@@ -8,6 +8,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { observer } from "mobx-react";
 import { Home } from "../screens/Home";
 import { CreatePost } from "../screens/Home/CreatePost";
 import { PostContent } from "../screens/Home/PostContent";
@@ -20,9 +21,7 @@ import { AuthStore } from "../stores/auth";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
-const isLandlord = AuthStore.isLandlord; // using AuthStore, but no roles variable in AuthStore
 
-// TODO use name CreatePost instead of NewPost
 function HomeNav() {
   return (
     <Stack.Navigator>
@@ -59,8 +58,8 @@ function LandlordFeedNav() {
   );
 }
 
-function AppNavigator() {
-  if(isLandlord)
+const AppNavigator = observer(function () {
+  if(AuthStore.isLandlord)
   {
     return (
       <Tab.Navigator screenOptions={{ headerShown: false }}>
@@ -139,6 +138,6 @@ function AppNavigator() {
     </Tab.Navigator>
   );
   }
-}
+})
 
 export default AppNavigator;
