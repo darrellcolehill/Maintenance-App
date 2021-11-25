@@ -1,14 +1,50 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useState } from "react";
 import { SearchBar } from "react-native-elements";
-import { View, StyleSheet, TouchableOpacity, Image, } from "react-native";
-import { Text, Button } from "react-native-paper";
+import { View, StyleSheet, TouchableOpacity, Image, FlatList } from "react-native";
+import { Text, Button, List } from "react-native-paper";
 import { AuthStore } from "../../stores/auth";
+import * as Api from "../../api"
+
+function PostItem({ item, onPress }) {
+  const { caption, location } = item;
+
+  return (
+    <TouchableOpacity onPress={onPress} style={[styles.item]}>
+
+      <List.Item
+        title={location}
+        description={caption}
+        left={props => <List.Icon {...props} icon="folder" />}
+      />
+
+    </TouchableOpacity>
+  );
+}
 
 export function Home({ navigation }) {
   let username = AuthStore.username;
   let [searchBar, setSearchBar] = useState("");
-  
+  let [postData, setPostData] = useState([])
+
+  const renderItem = ({ item }) => {
+    return (
+      <PostItem
+        item={item}
+        onPress={() => navigation.navigate("Post content", { post: item })}
+      />
+    );
+  };
+
+  const getPosts = async () => {
+    let data = await Api.getFeed();
+    setPostData(data.result)
+  }
+
+  useEffect(() => {
+    getPosts();
+}, []);
+
   return (
     <View style={styles.container}>
       <SearchBar
@@ -19,21 +55,22 @@ export function Home({ navigation }) {
       />
 
       <View style={styles.container} /* Code for createPost button*/ >
-        <TouchableOpacity 
-        style={styles.postButton}
-        activeOpacity={0.8}
-        onPress={() => navigation.navigate("Create a Post")}>
+        <TouchableOpacity
+          style={styles.postButton}
+          activeOpacity={0.8}
+          onPress={() => navigation.navigate("Create a Post")}>
           <Image source={require("../../assets/createPostImg.png")}
-                 style={styles.postImage}>
+            style={styles.postImage}>
           </Image>
           <Text style={styles.screenText}>Create a post</Text>
         </TouchableOpacity>
-      </View>
 
-      <Text> Welcome, {username}!</Text>
-      <Button onPress={() => AuthStore.logout()} mode="contained">
-        <Text style={styles.logout}>Sign out</Text>
-      </Button>
+        <FlatList
+          data={postData}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id.toString()}
+        />
+      </View>
     </View>
   );
 }

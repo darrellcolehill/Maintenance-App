@@ -1,5 +1,6 @@
 module.exports = [
 	`CREATE TABLE IF NOT EXISTS users (
+		id INTEGER PRIMARY KEY,
 		username STRING,
 		password STRING,
 		email STRING
@@ -12,6 +13,7 @@ module.exports = [
 	)`,
     
 	`CREATE TABLE IF NOT EXISTS messages (
+		id INTEGER PRIMARY KEY,
 		sender STRING,
 		receiver STRING,
 		message STRING,
@@ -19,6 +21,7 @@ module.exports = [
 	)`,
 
 	`CREATE TABLE IF NOT EXISTS posts (
+		id INTEGER PRIMARY KEY,
         PrivacyStatus INTEGER,
         ClaimStatus INTEGER,
         date TEXT,
