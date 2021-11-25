@@ -7,11 +7,22 @@ import {
   Text,
   TextInput,
   KeyboardAvoidingView,
+  Alert,
 } from "react-native";
 import { AuthStore } from "../../stores/auth";
 import * as Api from "../../api";
+import { AuthNavigator } from "../../navigations/AuthNavigator";
 
 function Login({ navigation }) {
+
+  const createOneButtonAlert = () =>
+    Alert.alert(
+      "Invalid Login Attempt",
+      "Icorrect Username/Password",
+      [
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ]
+    );
 
   async function submitLogin(username, password) {
 
@@ -29,7 +40,8 @@ function Login({ navigation }) {
       AuthStore.login(username, token);
     }catch(error){
       console.log("Prevented unauthorized login")
-      navigation.navigate("Login");
+      AuthStore.stopLoading();
+      createOneButtonAlert();
     }
   }
 
