@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Image } from "react-native";
-import { Title, Text } from "react-native-paper";
+import { View, StyleSheet, Image, ScrollView } from "react-native";
+import { Text } from "react-native-paper";
 import { TextInput, Button, RadioButton } from "react-native-paper";
 import * as Api from "../../api";
 import { AuthStore } from "../../stores/auth";
@@ -27,6 +27,7 @@ export function CreatePost({ navigation }) {
   const [caption, setCaption] = useState("");
   const [location, setLocation] = useState("");
   const [PrivacyStatus, setPrivacyStatus] = useState("public");
+  const [image, setImage] = useState(null);
 
   async function handleSubmit() {
     let dateString = getDateString();
@@ -35,7 +36,7 @@ export function CreatePost({ navigation }) {
       PrivacyStatus: PrivacyStatus,
       ClaimStatus: 0,
       date: dateString,
-      image: null, // TODO change after adding image picker
+      image: image,
       author: AuthStore.username,
       caption: caption,
       location: location
@@ -43,7 +44,6 @@ export function CreatePost({ navigation }) {
     navigation.goBack();
   }
 
-  const [image, setImage] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -62,18 +62,18 @@ export function CreatePost({ navigation }) {
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
+      base64: true,
     });
 
     console.log(result);
 
     if (!result.cancelled) {
-      setImage(result.uri);
+      setImage("data:image/png;base64," + result.base64);
     }
   };
 
-  // need: image
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <TextInput
         label="Location"
         onChangeText={text => setLocation(text)}
@@ -108,7 +108,7 @@ export function CreatePost({ navigation }) {
         onPress={() => handleSubmit()}>
         Submit
       </Button>
-    </View>
+    </ScrollView>
   );
 }
 

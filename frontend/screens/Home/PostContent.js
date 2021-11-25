@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, ScrollView } from "react-native";
 import { Title, Text } from "react-native-paper";
 
 // renders a full message. We come here when user clicks a message from the list
@@ -17,8 +17,11 @@ export function PostContent({ route }) {
   return (
     <View style={styles.container}>
       <Title>Posted by {author} on {date}</Title>
+      {image && <Image source={{ uri: image }} style={styles.image} />}
       <View style={styles.box}>
-        <Text style={styles.caption}>{caption}</Text>
+        <ScrollView>
+          <Text style={styles.caption}>{caption}</Text>
+        </ScrollView>
       </View>
       <Text>Claim status: {ClaimStatus === 1 ? "Claimed" : "Unclaimed"}</Text>
       <Text>Privacy status: {PrivacyStatus === 1 ? "Private" : "Public"}</Text>
@@ -35,10 +38,15 @@ const styles = StyleSheet.create({
   box: {
     borderColor: "black",
     borderWidth: 1,
-    height: "50%",
+    height: "30%",
     padding: 5,
   },
   caption: {
     fontSize: 19
+  },
+  image: {
+    width: 200,
+    height: 200,
+    alignSelf: "center"
   }
 })
