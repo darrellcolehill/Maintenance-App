@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Button, Text, Title } from "react-native-paper";
+import { AuthStore } from "../../stores/auth";
 
 export function Profile() {
   return (

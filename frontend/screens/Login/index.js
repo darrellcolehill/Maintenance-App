@@ -15,15 +15,22 @@ function Login({ navigation }) {
 
   async function submitLogin(username, password) {
 
-    AuthStore.startLoading();
+    try{
+      AuthStore.startLoading();
 
-    let response = await Api.login(username, password);
-    let token = response.token;
+      let response = await Api.login(username, password);
+      if(response.message != null){ throw error }
 
-    AuthStore.stopLoading();
+      let token = response.token;
 
-    //TODO: Also add user's role to AuthStore here
-    AuthStore.login(username, token);
+      AuthStore.stopLoading();
+
+      //TODO: Also add user's role to AuthStore here
+      AuthStore.login(username, token);
+    }catch(error){
+      console.log("Prevented unauthorized login")
+      navigation.navigate("Login");
+    }
   }
 
   let [username, setUsername] = useState("");
