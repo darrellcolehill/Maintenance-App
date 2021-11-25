@@ -18,7 +18,7 @@ function Login({ navigation }) {
   const createOneButtonAlert = () =>
     Alert.alert(
       "Invalid Login Attempt",
-      "Icorrect Username/Password",
+      "Incorrect Username/Password",
       [
         { text: "OK", onPress: () => console.log("OK Pressed") }
       ]
