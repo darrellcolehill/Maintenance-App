@@ -8,9 +8,7 @@ export function LandlordFeed({ navigation }) {
   return (
     <View style={styles.container}>
       <Text> Users in your building's posts:</Text>
-      <Button onPress={() => AuthStore.logout()} mode="contained">
-        Sign out
-      </Button>
+      
     </View>
   );
 }
