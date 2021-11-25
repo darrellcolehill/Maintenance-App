@@ -11,7 +11,6 @@ import {
 } from "react-native";
 import { AuthStore } from "../../stores/auth";
 import * as Api from "../../api";
-import { AuthNavigator } from "../../navigations/AuthNavigator";
 
 function Login({ navigation }) {
 
@@ -30,7 +29,7 @@ function Login({ navigation }) {
       AuthStore.startLoading();
 
       let response = await Api.login(username, password);
-      if(response.message != null){ throw error }
+      if(response.message != null){ throw loginError }
 
       let token = response.token;
 
@@ -38,7 +37,8 @@ function Login({ navigation }) {
 
       //TODO: Also add user's role to AuthStore here
       AuthStore.login(username, token);
-    }catch(error){
+      // AuthStore.setLandlord(token);      THIS LINE THROWS SOME ERROR IDK WHY BUT IT TRIGGERS THE POPUP I THINK I DIDN'T WORK W/ AUTHSTORE CORRECTLY
+    }catch(loginError){
       console.log("Prevented unauthorized login")
       AuthStore.stopLoading();
       createOneButtonAlert();
