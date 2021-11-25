@@ -4,7 +4,7 @@ import { TextInput, Button } from "react-native-paper";
 import * as Api from "../../api";
 
 // the screen for composing a new message
-export function NewMessage() {
+export function NewMessage({ navigation }) {
   const [recipient, setRecipient] = useState("")
   const [content, setContent] = useState("")
 
@@ -18,14 +18,7 @@ export function NewMessage() {
 
       let response = await Api.sendMessage(recipient, content);
 
-      // ADD NAVIGATION OR ALERT THAT MESSAGE IS SEND
-      //if(response.message == "Successful") navigation.navigate("Messages");
-      //else navigation.navigate("Signup");
-
-      //AuthStore.stopLoading();
-
-      //TODO: Also add user's role to AuthStore here
-      AuthStore.login(username, token);
+	  navigation.goBack();
   }
 
 
