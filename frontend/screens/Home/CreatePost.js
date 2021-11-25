@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, StyleSheet, Image } from "react-native";
 import { Title, Text } from "react-native-paper";
 import { TextInput, Button, RadioButton } from "react-native-paper";
 import * as Api from "../../api";
 import { AuthStore } from "../../stores/auth";
+import * as ImagePicker from "expo-image-picker"
 
 // TODO add image picker.
 
@@ -42,6 +43,34 @@ export function CreatePost({ navigation }) {
     navigation.goBack();
   }
 
+  const [image, setImage] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== 'web') {
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+          alert('Sorry, we need camera roll permissions to make this work!');
+        }
+      }
+    })();
+  }, []);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
+
   // need: image
   return (
     <View style={styles.container}>
@@ -56,6 +85,13 @@ export function CreatePost({ navigation }) {
         maxLength={charLimit}
         right={<TextInput.Affix text={`${caption.length}/${charLimit}`} />}
       />
+      <Button
+        icon="camera"
+        mode="contained"
+        onPress={pickImage}>
+        Choose an image
+      </Button>
+      {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
       <RadioButton.Group onValueChange={value => setPrivacyStatus(value)} value={PrivacyStatus}>
         <View style={styles.radioOption}>
           <Text>Public</Text>
