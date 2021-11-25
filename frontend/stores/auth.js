@@ -7,6 +7,7 @@ import { makeAutoObservable } from "mobx";
 class AuthModel {
   username = "";
   loggedIn = false;
+  isLandlord = false;
 
   // for authentication with backend (not used yet)
   token = "";
@@ -16,6 +17,11 @@ class AuthModel {
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+  setLandlord(token) {
+    obj = JSON.parse(token);
+    if(obj.isLandlord == true){ this.isLandlord = true; }
   }
 
   startLoading() {

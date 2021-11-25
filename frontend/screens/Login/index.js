@@ -7,23 +7,42 @@ import {
   Text,
   TextInput,
   KeyboardAvoidingView,
+  Alert,
 } from "react-native";
 import { AuthStore } from "../../stores/auth";
 import * as Api from "../../api";
 
 function Login({ navigation }) {
 
+  const createOneButtonAlert = () =>
+    Alert.alert(
+      "Invalid Login Attempt",
+      "Incorrect Username/Password",
+      [
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ]
+    );
+
   async function submitLogin(username, password) {
 
-    AuthStore.startLoading();
+    try{
+      AuthStore.startLoading();
 
-    let response = await Api.login(username, password);
-    let token = response.token;
+      let response = await Api.login(username, password);
+      if(response.message != null){ throw loginError }
 
-    AuthStore.stopLoading();
+      let token = response.token;
 
-    //TODO: Also add user's role to AuthStore here
-    AuthStore.login(username, token);
+      AuthStore.stopLoading();
+
+      //TODO: Also add user's role to AuthStore here
+      AuthStore.login(username, token);
+      // AuthStore.setLandlord(token);      THIS LINE THROWS SOME ERROR IDK WHY BUT IT TRIGGERS THE POPUP I THINK I DIDN'T WORK W/ AUTHSTORE CORRECTLY
+    }catch(loginError){
+      console.log("Prevented unauthorized login")
+      AuthStore.stopLoading();
+      createOneButtonAlert();
+    }
   }
 
   let [username, setUsername] = useState("");

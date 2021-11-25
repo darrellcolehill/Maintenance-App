@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 import * as Api from "../../api";
 
@@ -47,7 +47,7 @@ export function NewMessage() {
         icon="send"
         mode="contained"
         onPress={() => sendMessage(recipient, content)}>
-        Submit
+        <Text style={styles.logout}>SUBMIT</Text>
       </Button>
     </View>
   );
@@ -56,5 +56,9 @@ export function NewMessage() {
 const styles = StyleSheet.create({
   container: {
     margin: 10,
+  },
+  logout: {
+    color: "white",
+    fontWeight: "bold",
   }
 })

@@ -16,10 +16,11 @@ import { MessageContent } from "../screens/Messages/MessageContent";
 import { NewMessage } from "../screens/Messages/NewMessage"
 import { Profile } from "../screens/Profile";
 import { LandlordFeed } from "../screens/LandlordFeed";
+import { AuthStore } from "../stores/auth";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
-const isLandlord = true;  // WILL NEED TO IMPLEMENT SERVER-SIDE CODE ONCE COMPLETE HERE!!!
+const isLandlord = AuthStore.isLandlord; // using AuthStore, but no roles variable in AuthStore
 
 // TODO use name CreatePost instead of NewPost
 function HomeNav() {

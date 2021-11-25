@@ -7,7 +7,7 @@ export function LandlordFeed({ navigation }) {
   let username = AuthStore.username;
   return (
     <View style={styles.container}>
-      <Text>Welcome, {username}!</Text>
+      <Text> Users in your building's posts:</Text>
       <Button onPress={() => AuthStore.logout()} mode="contained">
         Sign out
       </Button>

@@ -64,7 +64,7 @@ export function Home({ navigation }) {
           </Image>
           <Text style={styles.screenText}>Create a post</Text>
         </TouchableOpacity>
-
+        <Text style={styles.separator}> Active posts:</Text>
         <FlatList
           data={postData}
           renderItem={renderItem}
@@ -103,6 +103,11 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignSelf: "center",
     justifyContent: "center",
+    margin: 3,
+  },
+
+  separator: {
+    fontSize: 16,
     margin: 3,
   },
 
