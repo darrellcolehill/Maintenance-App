@@ -19,7 +19,7 @@ app.use(logger("dev", { skip: () => process.env.NODE_ENV === "test" }));
 app.use(cors({ origin: `http://localhost:${config.frontendPort}` }));
 
 // parse requests of content-type - application/json
-app.use(express.json());
+app.use(express.json({ limit: "10MB" }));
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
