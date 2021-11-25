@@ -20,7 +20,7 @@ import { AuthStore } from "../stores/auth";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
-const isLandlord = true; // using AuthStore, but no roles variable in AuthStore
+const isLandlord = AuthStore.isLandlord; // using AuthStore, but no roles variable in AuthStore
 
 // TODO use name CreatePost instead of NewPost
 function HomeNav() {
