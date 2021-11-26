@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 import * as Api from "../../api";
+import { AuthStore } from "../../stores/auth";
 
 // the screen for composing a new message
 export function NewMessage() {
