@@ -13,7 +13,7 @@ exports.login = (req, res, next) =>
 			message: "Missing username or password"
 		});
 	}
-	
+
 	const db = getDb();
 	db.get("SELECT * FROM users WHERE username = ?", username)
 		.then(user => 
@@ -23,24 +23,25 @@ exports.login = (req, res, next) =>
 
 				// get role data for specified user
 				db.all("SELECT role, rating FROM roles WHERE username = ?", username)
-				.then(userRoles => 
-				{
-					
-					const tokenPayload = {
-						id: user.username,
-					};
+					.then(userRoles => 
+					{
 
-					const options = {
-						expiresIn: "24 hours"
-					};
-					return res.status(200).json({
-						token: jwt.sign(tokenPayload, jwtSecret, options),
-						roles: userRoles
+						const tokenPayload = {
+							id: user.id,
+							username: user.username
+						};
+
+						const options = {
+							expiresIn: "24 hours"
+						};
+						return res.status(200).json({
+							token: jwt.sign(tokenPayload, jwtSecret, options),
+							roles: userRoles
+						});
+
 					});
 
-				});
 
-				
 			}
 			else 
 			{
@@ -57,11 +58,11 @@ exports.login = (req, res, next) =>
 
 exports.signup = (req, res, next) => 
 {
-	const {username, password, email, isTenant, isLandlord, isHandyman, isHomeowner} = req.body;
+	const { username, password, email, isTenant, isLandlord, isHandyman, isHomeowner } = req.body;
 
 	// Array that will be used to help with inserting the user choosen roles
-	var roles = [{setRole: isTenant, value: "TENANT"}, {setRole: isLandlord, value: "LANDLORD"}, 
-				{setRole: isHandyman, value: "HANDYMAN"}, {setRole: isHomeowner, value: "HOMEOWNER"}];
+	var roles = [{ setRole: isTenant, value: "TENANT" }, { setRole: isLandlord, value: "LANDLORD" },
+		{ setRole: isHandyman, value: "HANDYMAN" }, { setRole: isHomeowner, value: "HOMEOWNER" }];
 
 	console.log(roles);
 
@@ -71,7 +72,7 @@ exports.signup = (req, res, next) =>
 			message: "Missing username or password"
 		});
 	}
-	
+
 	const db = getDb();
 	db.get("SELECT (rowid) FROM users WHERE username = ?", username)
 		.then(user => 
@@ -85,20 +86,20 @@ exports.signup = (req, res, next) =>
 					.then(() => 
 					{
 						// inserts user choosen roles into roles database
-						for(var i = 0; i < roles.length; i++)
+						for (var i = 0; i < roles.length; i++) 
 						{
-							if(roles[i].setRole == true)
+							if (roles[i].setRole == true) 
 							{
 								db.run(
 									"INSERT INTO roles (username, role, rating) VALUES (?, ?, ?)",
 									[username, roles[i].value, 0.0]
 								)
-								.catch(error => 
-								{
-									return next(error);
-								})
+									.catch(error => 
+									{
+										return next(error);
+									});
 							}
-								
+
 						}
 
 						return res.status(200).json({

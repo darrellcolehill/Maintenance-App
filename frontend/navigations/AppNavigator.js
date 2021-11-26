@@ -8,21 +8,26 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { observer } from "mobx-react";
 import { Home } from "../screens/Home";
+import { CreatePost } from "../screens/Home/CreatePost";
+import { PostContent } from "../screens/Home/PostContent";
 import { Messages } from "../screens/Messages";
 import { MessageContent } from "../screens/Messages/MessageContent";
 import { NewMessage } from "../screens/Messages/NewMessage"
 import { Profile } from "../screens/Profile";
 import { LandlordFeed } from "../screens/LandlordFeed";
+import { AuthStore } from "../stores/auth";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
-const isLandlord = true;  // WILL NEED TO IMPLEMENT SERVER-SIDE CODE ONCE COMPLETE HERE!!!
 
 function HomeNav() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Homepage" component={Home} />
+      <Stack.Screen name="Create a Post" component={CreatePost}/>
+      <Stack.Screen name="Post content" component={PostContent} />
     </Stack.Navigator>
   );
 }
@@ -30,7 +35,7 @@ function HomeNav() {
 function MessagesNav() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Messages" component={Messages} />
+      <Stack.Screen name="Message Inbox" component={Messages} />
       <Stack.Screen name="Message content" component={MessageContent} />
       <Stack.Screen name="New message" component={NewMessage} />
     </Stack.Navigator>
@@ -40,7 +45,7 @@ function MessagesNav() {
 function ProfileNav() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="User Profile" component={Profile} />
     </Stack.Navigator>
   );
 }
@@ -48,13 +53,13 @@ function ProfileNav() {
 function LandlordFeedNav() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="LandlordFeed" component={LandlordFeed} />
+      <Stack.Screen name="Personalized Feed" component={LandlordFeed} />
     </Stack.Navigator>
   );
 }
 
-function AppNavigator() {
-  if(isLandlord)
+const AppNavigator = observer(function () {
+  if(AuthStore.isLandlord)
   {
     return (
       <Tab.Navigator screenOptions={{ headerShown: false }}>
@@ -133,6 +138,6 @@ function AppNavigator() {
     </Tab.Navigator>
   );
   }
-}
+})
 
 export default AppNavigator;

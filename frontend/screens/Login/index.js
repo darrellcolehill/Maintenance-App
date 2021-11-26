@@ -7,48 +7,92 @@ import {
   Text,
   TextInput,
   KeyboardAvoidingView,
+  Alert,
 } from "react-native";
 import { AuthStore } from "../../stores/auth";
 import * as Api from "../../api";
 
 function Login({ navigation }) {
 
+  const createOneButtonAlert = () =>
+    Alert.alert(
+      "Invalid Login Attempt",
+      "Incorrect Username/Password",
+      [
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ]
+    );
+
+
   async function submitLogin(username, password) {
 
-    AuthStore.startLoading();
+      AuthStore.startLoading();
 
-    let response = await Api.login(username, password);
-    let token = response.token;
-    let roles = response.roles;
+      let response = await Api.login(username, password);
 
-    let isLandlord = false; 
-    let isTenant = false; 
-    let isHandyman = false;
-    let isHomeowner = false;
+		if(response.token)
+		{
+			let {token, roles} = response;
+			// NOTE: roles is looks like [{"rating": x, "role": y}]
+			// so each "role" is actually a rating and a role
+
+			AuthStore.stopLoading();
+
+
+      let response = await Api.login(username, password);
+      let token = response.token;
+      let roles = response.roles;
+
+      let isLandlord = false; 
+      let isTenant = false; 
+      let isHandyman = false;
+      let isHomeowner = false;
     
-    for(var i = 0; i < roles.length; i++)
-    {
-      if(roles[i].role == "LANDLORD")
+      for(var i = 0; i < roles.length; i++)
       {
-        isLandlord = true;
+        if(roles[i].role == "LANDLORD")
+        {
+          isLandlord = true;
+        }
+        else if(roles[i].role == "TENANT")
+        {
+          isTenant = true;
+        }
+        else if(roles[i].role == "HANDYMAN")
+        {
+          isHandyman = true;
+        }
+        else
+        {
+          isHomeowner = true;
+        }
       }
-      else if(roles[i].role == "TENANT")
-      {
-        isTenant = true;
-      }
-      else if(roles[i].role == "HANDYMAN")
-      {
-        isHandyman = true;
-      }
-      else
-      {
-        isHomeowner = true;
-      }
+
+      AuthStore.login(username, token, isLandlord, isTenant, isHandyman, isHomeowner);
+
+      AuthStore.stopLoading();
+
+      /*
+            AuthStore.login(username, token);
+
+            // checking if the user has a landlord role
+            let isLandlord = false;
+            roles.forEach(item => {
+              if (item.role == "LANDLORD")
+                isLandlord = true;
+            })
+
+            console.log(`${(isLandlord)?"Is":"Is not"} a landlord`)
+            AuthStore.setIsLandlord(isLandlord);
+          }
+            
+          else{
+            console.log("Prevented unauthorized login")
+            AuthStore.stopLoading();
+            createOneButtonAlert();
+          }
+      */
     }
-
-    AuthStore.login(username, token, isLandlord, isTenant, isHandyman, isHomeowner);
-
-    AuthStore.stopLoading();
   }
 
   let [username, setUsername] = useState("");
@@ -65,7 +109,7 @@ function Login({ navigation }) {
           onPress={() => submitLogin(username, password)}
           activeOpacity={0.8}
         >
-          <Text style={styles.textFonts}>Login</Text>
+          <Text style={styles.textFonts}>LOGIN</Text>
         </TouchableOpacity>
 
         <TouchableOpacity // register account element
@@ -73,7 +117,7 @@ function Login({ navigation }) {
           onPress={() => navigation.navigate("Signup")}
           activeOpacity={0.8}
         >
-          <Text style={styles.textFonts}>Register for a new account!</Text>
+          <Text style={styles.textFonts}>REGISTER ACCOUNT</Text>
         </TouchableOpacity>
 
         <TextInput // username box element
@@ -149,6 +193,8 @@ const styles = StyleSheet.create({
   },
   textFonts: {
     fontSize: 25,
+    fontWeight: 'bold',
+    color: 'white',
   },
 });
 

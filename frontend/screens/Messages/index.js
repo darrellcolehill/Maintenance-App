@@ -34,12 +34,15 @@ function MessageItem({ item, onPress }) {
 export function Messages({ navigation }) {
 
   const [messageData, setMessageData] = useState([]);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
       const getMessages = async () => {
-
+        
           let response = await Api.getMessages();
 
           setMessageData(response.messages);
+
+		  setIsRefreshing(false);
         }
 
 
@@ -64,6 +67,8 @@ export function Messages({ navigation }) {
         data={messageData}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
+	    onRefresh={() => {setIsRefreshing(true); getMessages();}}
+	    refreshing={isRefreshing}
       />
       <FAB 
         style={styles.fab}

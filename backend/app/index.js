@@ -5,9 +5,13 @@ const config = require("./config.json");
 const authRoutes = require("./auth/routes");
 const messagingRoutes = require("./messaging/routes");
 const ratingRoutes = require("./rating/routes");
+const postRoutes = require("./posts/routes");
 const jwt = require("express-jwt");
 const handleError = require("./middlewares/errorHandler");
 const logger = require("morgan");
+
+// workaround to disable empty responses with code 304
+app.disable("etag");
 
 // log requests to console
 app.use(logger("dev", { skip: () => process.env.NODE_ENV === "test" }));
@@ -16,7 +20,7 @@ app.use(logger("dev", { skip: () => process.env.NODE_ENV === "test" }));
 app.use(cors({ origin: `http://localhost:${config.frontendPort}` }));
 
 // parse requests of content-type - application/json
-app.use(express.json());
+app.use(express.json({ limit: "10MB" }));
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
@@ -25,6 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/auth", authRoutes);
 app.use("/messaging", messagingRoutes);
 app.use("/rating", ratingRoutes);
+app.use("/posts", postRoutes);
 
 // simple route for testing
 app.get("/", (_req, res) => 
