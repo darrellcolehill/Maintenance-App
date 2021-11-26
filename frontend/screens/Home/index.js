@@ -71,8 +71,8 @@ export function Home({ navigation }) {
           data={posts}
           renderItem={renderItem}
           keyExtractor={(item) => item.id.toString()}
-		  onRefresh={() => {setIsRefreshing(true); getPosts();}}
-	  	  refreshing={isRefreshing}
+		      onRefresh={() => {setIsRefreshing(true); getPosts();}}
+	  	    refreshing={isRefreshing}
         />
       </View>
     </View>
