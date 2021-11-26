@@ -36,11 +36,6 @@ function Login({ navigation }) {
 			// NOTE: roles is looks like [{"rating": x, "role": y}]
 			// so each "role" is actually a rating and a role
 
-
-      let response = await Api.login(username, password);
-      let token = response.token;
-      let roles = response.roles;
-
       let isLandlord = false; 
       let isTenant = false; 
       let isHandyman = false;

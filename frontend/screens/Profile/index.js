@@ -61,7 +61,7 @@ export function Profile() {
       <Text>Your ratings</Text>
       <FlatList
         data={ratingData}
-        renderItem={RenderItem}
+        renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
       />
 

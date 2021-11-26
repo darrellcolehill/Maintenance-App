@@ -13,6 +13,7 @@ exports.getCurrentUserRatings = (req, res, next) =>
     // 
     const userToken = jwt.verify(req.body.token, jwtSecret);
 
+
     if(!userToken)
     {
         return res.status(400).json({
@@ -20,13 +21,10 @@ exports.getCurrentUserRatings = (req, res, next) =>
 		});
     }
 
-
     const db = getDb();
-
-
     db.all(
         "SELECT (rowid) AS id,  rating, role, numRatings FROM roles WHERE username = ?",
-        userToken.id
+        userToken.username
     )
     .then(data => 
     {

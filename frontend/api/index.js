@@ -173,7 +173,6 @@ export async function getMessages() {
 export async function getCurrentUserRatings() {
 
   try {
-      
     const userToken = AuthStore.token;
 
     const response = await fetch(URL + '/rating/getCurrentUserRatings', {

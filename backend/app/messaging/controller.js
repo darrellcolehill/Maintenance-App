@@ -8,7 +8,6 @@ const jwtSecret = config.jwtSecret;
 // sends message to specified user
 exports.sendMessage = (req, res, next) => 
 {
-	console.log("user trying to send message");
 
     // NOTE: may have to convert the string containing the token to a json file, since
     // Asyncstorage is storing the string as a character??
@@ -68,7 +67,6 @@ exports.sendMessage = (req, res, next) =>
 // gets messages for specified user
 exports.getMessages = (req, res, next) => 
 {
-	console.log("user trying to get messages");
 
     // NOTE: may have to convert the string containing the token to a json file, since
     // Asyncstorage is storing the string as a character??
