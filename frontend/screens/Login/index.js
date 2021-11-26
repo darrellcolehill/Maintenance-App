@@ -93,6 +93,11 @@ function Login({ navigation }) {
           }
       */
     }
+    else{
+      console.log("Prevented unauthorized login")
+      AuthStore.stopLoading();
+      createOneButtonAlert();
+    }
   }
 
   let [username, setUsername] = useState("");
