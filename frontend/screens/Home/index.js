@@ -25,7 +25,8 @@ function PostItem({ item, onPress }) {
 export function Home({ navigation }) {
   let username = AuthStore.username;
   let [searchBar, setSearchBar] = useState("");
-  let [postData, setPostData] = useState([])
+  let [posts, setPosts] = useState([])
+  let [isRefreshing, setIsRefreshing] = useState(false)
 
   const renderItem = ({ item }) => {
     return (
@@ -38,7 +39,8 @@ export function Home({ navigation }) {
 
   const getPosts = async () => {
     let data = await Api.getFeed();
-    setPostData(data.result)
+    setPosts(data.result)
+	setIsRefreshing(false)
   }
 
   useEffect(() => {
@@ -66,9 +68,11 @@ export function Home({ navigation }) {
         </TouchableOpacity>
         <Text style={styles.separator}> Active posts:</Text>
         <FlatList
-          data={postData}
+          data={posts}
           renderItem={renderItem}
           keyExtractor={(item) => item.id.toString()}
+		  onRefresh={() => {setIsRefreshing(true); getPosts();}}
+	  	  refreshing={isRefreshing}
         />
       </View>
     </View>
