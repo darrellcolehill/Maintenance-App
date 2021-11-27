@@ -12,6 +12,7 @@ import { observer } from "mobx-react";
 import { Home } from "../screens/Home";
 import { CreatePost } from "../screens/Home/CreatePost";
 import { PostContent } from "../screens/Home/PostContent";
+import { Search } from "../screens/Home/Search";
 import { Messages } from "../screens/Messages";
 import { MessageContent } from "../screens/Messages/MessageContent";
 import { NewMessage } from "../screens/Messages/NewMessage"
@@ -28,6 +29,7 @@ function HomeNav() {
       <Stack.Screen name="Homepage" component={Home} />
       <Stack.Screen name="Create a Post" component={CreatePost}/>
       <Stack.Screen name="Post content" component={PostContent} />
+      <Stack.Screen name="Search" component={Search} />
     </Stack.Navigator>
   );
 }

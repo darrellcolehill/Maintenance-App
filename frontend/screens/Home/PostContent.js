@@ -23,8 +23,8 @@ export function PostContent({ route }) {
           <Text style={styles.caption}>{caption}</Text>
         </ScrollView>
       </View>
-      <Text>Claim status: {ClaimStatus === 1 ? "Claimed" : "Unclaimed"}</Text>
-      <Text>Privacy status: {PrivacyStatus === 1 ? "Private" : "Public"}</Text>
+      <Text>Claim status: {ClaimStatus}</Text>
+      <Text>Privacy status: {PrivacyStatus}</Text>
       <Text>Location: {location}</Text>
     </View>
   );

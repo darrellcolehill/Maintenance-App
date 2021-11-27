@@ -50,7 +50,7 @@ exports.makePost = (req, res, next) =>
  */
 exports.search = (req, res, next) => 
 {
-	const { location } = req.body;
+	const { location } = req.params;
 
 	// Finding the user's role
 	let userRole;

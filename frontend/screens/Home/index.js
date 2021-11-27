@@ -1,32 +1,16 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { SearchBar } from "react-native-elements";
 import { View, StyleSheet, TouchableOpacity, Image, FlatList } from "react-native";
 import { Text, Button, List } from "react-native-paper";
 import { AuthStore } from "../../stores/auth";
+import PostItem from "./PostItem";
 import * as Api from "../../api"
-
-function PostItem({ item, onPress }) {
-  const { caption, location } = item;
-
-  return (
-    <TouchableOpacity onPress={onPress} style={[styles.item]}>
-
-      <List.Item
-        title={location}
-        description={caption}
-        left={props => <List.Icon {...props} icon="folder" />}
-      />
-
-    </TouchableOpacity>
-  );
-}
 
 export function Home({ navigation }) {
   let username = AuthStore.username;
   let [searchBar, setSearchBar] = useState("");
 
-  
   let [posts, setPosts] = useState([])
   let [isRefreshing, setIsRefreshing] = useState(false)
 
@@ -42,21 +26,27 @@ export function Home({ navigation }) {
   const getPosts = async () => {
     let data = await Api.getFeed();
     setPosts(data.result)
-	setIsRefreshing(false)
+    setIsRefreshing(false)
   }
 
   useEffect(() => {
     getPosts();
-}, []);
+  }, []);
 
   return (
     <View style={styles.container}>
-      <SearchBar
+      {/* <SearchBar
         lightTheme="True"
         placeholder="Search..."
         onChangeText={text => setSearchBar(text)}
         value={searchBar}
-      />
+      /> */}
+      <Button
+        icon="magnify"
+        mode="contained"
+        onPress={() => navigation.navigate("Search")}>
+        Search
+      </Button>
 
       <View style={styles.container} /* Code for createPost button*/ >
         <TouchableOpacity
@@ -73,8 +63,8 @@ export function Home({ navigation }) {
           data={posts}
           renderItem={renderItem}
           keyExtractor={(item) => item.id.toString()}
-		      onRefresh={() => {setIsRefreshing(true); getPosts();}}
-	  	    refreshing={isRefreshing}
+          onRefresh={() => { setIsRefreshing(true); getPosts(); }}
+          refreshing={isRefreshing}
         />
       </View>
     </View>
