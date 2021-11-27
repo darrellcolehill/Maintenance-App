@@ -38,4 +38,9 @@ router.get("/getFeed",
 	posts.getFeed
 );
 
+router.get("/getLFeed",
+	jwt({ secret: config.jwtSecret, algorithms: ["HS256"] }),
+	posts.getLFeed
+);
+
 module.exports = router;

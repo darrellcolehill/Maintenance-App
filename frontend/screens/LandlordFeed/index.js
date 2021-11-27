@@ -21,7 +21,7 @@ export function LandlordFeed({ navigation }) {
   };
 
   const getPosts = async () => {
-    let data = await Api.getFeed();
+    let data = await Api.getLFeed();
     setPosts(data.result)
     setIsRefreshing(false)
   }

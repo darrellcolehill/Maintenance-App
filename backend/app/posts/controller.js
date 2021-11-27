@@ -103,3 +103,22 @@ exports.getFeed = (req, res, next) =>
 			return next(error);
 		});
 };
+
+exports.getLFeed = (req, res, next) =>
+{
+	const db = getDb();
+
+	// Getting landlord's feed posts
+	// TODO allow users to have a location (fix this)
+	db.all("SELECT * from posts WHERE location=?", req.user.username)
+		.then(rows => 
+		{
+			res.status(200).send({
+				result: rows
+			});
+		})
+		.catch(error => 
+		{
+			return next(error);
+		});
+};
