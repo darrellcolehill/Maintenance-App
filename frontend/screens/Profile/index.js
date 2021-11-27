@@ -35,8 +35,7 @@ export function Profile() {
         </View>
       </View>
       <View style={styles.logoutContainer}>
-      <Button style={styles.logoutButton} onPress={() => AuthStore.logoutText
-        ()} mode="contained">
+      <Button style={styles.logoutButton} onPress={() => AuthStore.logout()} mode="contained">
         <Text style={styles.logoutText}>LOGOUT</Text>
       </Button>
       </View>
