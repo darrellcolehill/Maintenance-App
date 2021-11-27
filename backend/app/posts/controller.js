@@ -108,19 +108,31 @@ exports.getFeed = (req, res, next) =>
 
 exports.getLFeed = (req, res, next) =>
 {
+	let failed = false;
 	const db = getDb();
 
-	// Getting landlord's feed posts
-	// TODO allow users to have a location (fix this)
-	db.all("SELECT * from posts WHERE location=?", req.user.username)
-		.then(rows => 
-			{
+	db.get("SELECT * from users WHERE id=?", req.user.id)
+		.then(row => {
+			return row.location;
+		})
+		.then(location => {
+			if (!location) {
+				failed = true;
+				res.status(401).send({
+					message: "NEED_LOCATION"
+				});
+			} else {
+				return db.all("SELECT * from posts WHERE location=?",
+					[location])
+			}
+		})
+		.then(rows => {
+			if (!failed)
 				res.status(200).send({
 					result: rows
 				});
-			})
-			.catch(error => 
-				{
-					return next(error);
-				});
+		})
+		.catch(error => {
+			next(error);
+		});
 };

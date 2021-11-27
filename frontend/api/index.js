@@ -11,7 +11,7 @@ function delay(ms) {
 
 
 
-const URL = 'http://9d36-72-188-118-58.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
+const URL = 'http://4691-72-188-118-58.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
 
 
 
@@ -373,6 +373,48 @@ export async function getFeed() {
     const json = await response.json();
     console.log(json); // TODO: delete later after testing
     return json;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getLFeed() {
+  let token = AuthStore.token;
+  try {
+    const response = await fetch(URL + '/posts/getLFeed', {
+      method: 'GET',
+      headers: {
+        'Accept': '*/*',  // It can be used to overcome cors errors
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }
+    });
+
+    const json = await response.json();
+    console.log(json); // TODO: delete later after testing
+    return json;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+/**
+ * 
+ * @param {Object} data information to send server
+ * @param data.location new location
+ */
+export async function setOwnLocation(data) {
+  let token = AuthStore.token;
+  try {
+    const response = await fetch(URL + '/users/setOwnLocation', {
+      method: 'POST',
+      headers: {
+        'Accept': '*/*',  // It can be used to overcome cors errors
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify(data)
+    });
   } catch (error) {
     console.error(error);
   }

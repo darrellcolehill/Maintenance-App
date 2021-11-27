@@ -16,4 +16,15 @@ router.get("/search/:username?",
 	users.search
 );
 
+/**
+ * params: location
+ * location is required.
+ * This route requires a valid token in the header.
+ * If no valid token given, responds with status 401
+ * on success, responds with status 200
+ */
+router.post("/setOwnLocation",
+	jwt({ secret: config.jwtSecret, algorithms: ["HS256"] }),
+	users.setOwnLocation
+);
 module.exports = router;
