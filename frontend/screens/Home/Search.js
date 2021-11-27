@@ -3,6 +3,7 @@ import { View, StyleSheet, FlatList } from "react-native";
 import { Text, Searchbar, RadioButton, ActivityIndicator } from "react-native-paper";
 import * as Api from "../../api";
 import PostItem from "./PostItem";
+import UserItem from "./UserItem";
 
 export function Search({ navigation }) {
   const [query, setQuery] = useState("");
@@ -19,11 +20,11 @@ export function Search({ navigation }) {
     if (queryMode === "posts") {
       data = await Api.searchPosts({ location: query });
     } else if (queryMode === "users") {
-      data = { result: true }; // TODO implement user search
+      // data = { result: true }; // TODO implement user search
+      data = await Api.searchUsers({ username: query });
     }
     setResultsMode(queryMode);
     setResults(data.result);
-    console.log("results", results);
     setLoading(false);
   }
 
@@ -32,6 +33,15 @@ export function Search({ navigation }) {
       <PostItem
         item={item}
         onPress={() => navigation.navigate("Post content", { post: item })}
+      />
+    );
+  };
+
+  const renderUserItem = ({ item }) => {
+    return (
+      <UserItem
+        item={item}
+        onPress={() => navigation.navigate("User content", { user: item })}
       />
     );
   };
@@ -61,7 +71,11 @@ export function Search({ navigation }) {
           <ActivityIndicator />
         ) : results && results.length > 0 ? (
           (resultsMode === "users") ? (
-            <Text>TODO implement user search</Text>
+            <FlatList
+              data={results}
+              renderItem={renderUserItem}
+              keyExtractor={(item) => item.id.toString()}
+            />
           ) : (
             <FlatList
               data={results}

@@ -6,6 +6,7 @@ const authRoutes = require("./auth/routes");
 const messagingRoutes = require("./messaging/routes");
 const ratingRoutes = require("./rating/routes");
 const postRoutes = require("./posts/routes");
+const userRoutes = require("./users/routes");
 const jwt = require("express-jwt");
 const handleError = require("./middlewares/errorHandler");
 const logger = require("morgan");
@@ -30,6 +31,7 @@ app.use("/auth", authRoutes);
 app.use("/messaging", messagingRoutes);
 app.use("/rating", ratingRoutes);
 app.use("/posts", postRoutes);
+app.use("/users", userRoutes);
 
 // simple route for testing
 app.get("/", (_req, res) => 
