@@ -3,7 +3,8 @@ module.exports = [
 		id INTEGER PRIMARY KEY,
 		username STRING,
 		password STRING,
-		email STRING
+		email STRING,
+		location STRING
 	)`,
 
 	`CREATE TABLE IF NOT EXISTS roles (
