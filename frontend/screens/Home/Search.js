@@ -6,7 +6,7 @@ import PostItem from "./PostItem";
 
 export function Search({ navigation }) {
   const [query, setQuery] = useState("");
-  const [queryMode, setQueryMode] = useState("");
+  const [queryMode, setQueryMode] = useState("posts");
   const [resultsMode, setResultsMode] = useState("");
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState(null);
