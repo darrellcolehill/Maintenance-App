@@ -32,7 +32,7 @@ export function LandlordFeed({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text> Users in your building's posts:</Text>
+      <Text>Posts from users in your building:</Text>
       <FlatList
           data={posts}
           renderItem={renderItem}
