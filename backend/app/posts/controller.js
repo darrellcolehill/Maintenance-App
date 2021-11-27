@@ -15,32 +15,32 @@ exports.makePost = (req, res, next) =>
 
 	const db = getDb();
 	db.run(`INSERT INTO posts (
-            PrivacyStatus,
-            ClaimStatus,
-            date,
-            image,
-            author,
-            caption,
-            location
-        ) 
-        VALUES (?, ?, ?, ?, ?, ?, ?)`,
-	[PrivacyStatus,
-		ClaimStatus,
-		date,
-		image,
-		author,
-		caption,
-		location])
+			PrivacyStatus,
+			ClaimStatus,
+			date,
+			image,
+			author,
+			caption,
+			location
+		) 
+		VALUES (?, ?, ?, ?, ?, ?, ?)`,
+		[PrivacyStatus,
+			ClaimStatus,
+			date,
+			image,
+			author,
+			caption,
+			location])
 		.then(() => 
-		{
-			res.status(200).send({
-				message: "Successfully added post!"
-			});
-		})
-		.catch((error) => 
-		{
-			return next(error);
-		});
+			{
+				res.status(200).send({
+					message: "Successfully added post!"
+				});
+			})
+			.catch((error) => 
+				{
+					return next(error);
+				});
 };
 
 /**
@@ -52,32 +52,34 @@ exports.search = (req, res, next) =>
 {
 	const { location } = req.params;
 
-	// Finding the user's role
-	let userRole;
 	const db = getDb();
-	db.run("SELECT (role) FROM roles WHERE username=?", req.user.username)
-		.then(row => 
-		{
-			userRole = row.role;
-		});
-
-	let query = "SELECT * FROM posts WHERE location=?", args = [location];
-
-	// Restrict to public posts if user is not a handyman
-	if (userRole !== "handyman")
-		query = `${query} AND PrivacyStatus='public'`;
-
-	db.all(query, args)
+	db.all("SELECT role FROM roles WHERE username=?", req.user.username)
 		.then(rows => 
-		{
-			res.status(200).send({
-				result: rows
-			});
-		})
-		.catch((error) => 
-		{
-			return next(error);
-		});
+			{
+				let isHandyman = false;
+				for (row of rows) {
+					if (row.role === 'HANDYMAN') {
+						isHandyman = true;
+					}
+				}
+				return isHandyman;
+			})
+			.then(isHandyman => {
+				let query = "SELECT * FROM posts WHERE location=?", args = [location];
+				if (!isHandyman)
+					query = `${query} AND PrivacyStatus='public'`;
+				return db.all(query, args);
+			})
+			.then(rows => 
+				{
+					res.status(200).send({
+						result: rows
+					});
+				})
+			.catch((error) => 
+				{
+					return next(error);
+				});
 };
 
 /**
@@ -93,15 +95,15 @@ exports.getFeed = (req, res, next) =>
 	// TODO different results for landlord feed?
 	db.all("SELECT * from posts WHERE author=?", req.user.username)
 		.then(rows => 
-		{
-			res.status(200).send({
-				result: rows
-			});
-		})
-		.catch(error => 
-		{
-			return next(error);
-		});
+			{
+				res.status(200).send({
+					result: rows
+				});
+			})
+			.catch(error => 
+				{
+					return next(error);
+				});
 };
 
 exports.getLFeed = (req, res, next) =>
@@ -112,13 +114,13 @@ exports.getLFeed = (req, res, next) =>
 	// TODO allow users to have a location (fix this)
 	db.all("SELECT * from posts WHERE location=?", req.user.username)
 		.then(rows => 
-		{
-			res.status(200).send({
-				result: rows
-			});
-		})
-		.catch(error => 
-		{
-			return next(error);
-		});
+			{
+				res.status(200).send({
+					result: rows
+				});
+			})
+			.catch(error => 
+				{
+					return next(error);
+				});
 };
