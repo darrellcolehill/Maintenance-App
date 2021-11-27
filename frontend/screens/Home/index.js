@@ -45,7 +45,7 @@ export function Home({ navigation }) {
         icon="magnify"
         mode="contained"
         onPress={() => navigation.navigate("Search")}>
-        Search
+        <Text style={styles.logout}>SEARCH</Text>
       </Button>
 
       <View style={styles.container} /* Code for createPost button*/ >
