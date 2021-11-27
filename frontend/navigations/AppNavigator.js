@@ -20,6 +20,7 @@ import { NewMessage } from "../screens/Messages/NewMessage"
 import { Profile } from "../screens/Profile";
 import { LandlordFeed } from "../screens/LandlordFeed";
 import { AuthStore } from "../stores/auth";
+import { PostContentL } from "../screens/LandlordFeed/PostContentL";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -58,6 +59,7 @@ function LandlordFeedNav() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Personalized Feed" component={LandlordFeed} />
+      <Stack.Screen name="Tenant post" component={PostContentL} />
     </Stack.Navigator>
   );
 }
