@@ -19,7 +19,7 @@ function RatingItem({ item}) {
 }
 
 
-export function Profile() {
+export function Profile( {navigation} ) {
   let username = AuthStore.username;
 
   return (
@@ -35,9 +35,14 @@ export function Profile() {
         </View>
       </View>
       <View style={styles.logoutContainer}>
-      <Button style={styles.logoutButton} onPress={() => AuthStore.logout()} mode="contained">
-        <Text style={styles.logoutText}>LOGOUT</Text>
-      </Button>
+        {AuthStore.isLandlord &&  /* checks if user is landlord*/
+          <Button style={styles.logoutButton} onPress={() =>  navigation.navigate("Add a location")}>
+            <Text style={styles.logoutText}>ADD A LOCATION</Text>
+          </Button>
+        }
+        <Button style={styles.logoutButton} onPress={() => AuthStore.logout()} mode="contained">
+          <Text style={styles.logoutText}>LOGOUT</Text>
+        </Button>
       </View>
     </View>
   );
@@ -97,6 +102,7 @@ const styles = StyleSheet.create({
 
   logoutButton: {
     backgroundColor: 'slategray',
+    margin: 5
   },
 
   logoutText
