@@ -11,7 +11,7 @@ function delay(ms) {
 
 
 
-const URL = 'http://4691-72-188-118-58.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
+const URL = 'http://f16f-98-238-8-179.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
 
 
 
@@ -271,7 +271,6 @@ export async function giveUserRatings(requestedUser, rating, role) {
   }
 
   return null;
-
 }
 
 
@@ -403,18 +402,24 @@ export async function getLFeed() {
  * @param {Object} data information to send server
  * @param data.location new location
  */
-export async function setOwnLocation(data) {
+export async function setOwnLocation(location) {
   let token = AuthStore.token;
   try {
     const response = await fetch(URL + '/users/setOwnLocation', {
       method: 'POST',
       headers: {
         'Accept': '*/*',  // It can be used to overcome cors errors
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify({
+        token: token,
+        location: location
+     })
     });
+
+    console.log(response); // TODO: delete after testing
+
+
   } catch (error) {
     console.error(error);
   }
