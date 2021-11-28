@@ -11,7 +11,7 @@ function delay(ms) {
 
 
 
-const URL = 'http://f16f-98-238-8-179.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
+const URL = 'http://ed1f-72-188-118-58.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
 
 
 
@@ -377,6 +377,8 @@ export async function getFeed() {
   }
 }
 
+
+// TODO: try to use getLFeed in main!!!!!!!
 export async function getLFeed() {
   let token = AuthStore.token;
   try {
@@ -397,11 +399,16 @@ export async function getLFeed() {
   }
 }
 
+
+
+
 /**
  * 
  * @param {Object} data information to send server
  * @param data.location new location
  */
+
+// TODO: try to use setOwnLocation in main!!!!!!!
 export async function setOwnLocation(location) {
   let token = AuthStore.token;
   try {
@@ -417,9 +424,9 @@ export async function setOwnLocation(location) {
      })
     });
 
-    console.log(response); // TODO: delete after testing
-
-
+    const json = await response.json();
+    console.log(json); // TODO: delete after testing
+    return json;
   } catch (error) {
     console.error(error);
   }
