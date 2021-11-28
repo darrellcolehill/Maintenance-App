@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Image,} from "react-native";
+import { View, StyleSheet, Image, FlatList} from "react-native";
 import { Button, Text,} from "react-native-paper";
 import StarRating from 'react-native-star-rating';
 import { AuthStore } from "../../stores/auth";
@@ -9,6 +9,7 @@ import * as Api from "../../api";
 const ROLES = ['Tenant', 'Landlord', 'Handyman', 'Homeowner'];
 const SCORES = [2.5, 4.8, 3.2, 1.6];
 
+/*
 var roleCount;
 
 // Renders a rating component
@@ -33,7 +34,7 @@ const Rating = () => {
           </View>
       </View>
   );
-}
+}*/
 
 // Component for not rendering rating but keeping count
 const MissingRating = () => {
@@ -42,9 +43,98 @@ const MissingRating = () => {
   return null;
 }
 
+
+
+function Rating ({item}) {
+
+  console.log(item.rating)
+
+  return (
+      <View style={styles.ratingInfo}>
+        <View style={styles.ratingTitleContainer}>
+          <Text style={styles.ratingTitle}>{item.role}</Text>
+        </View>
+          <View style={styles.starContainer}>
+            <StarRating style={styles.stars}
+              maxStars={5}
+              rating={item.rating}
+              starSize={25}
+              emptyStarColor={'slategray'}
+              halfStarColor={'slategray'}
+              fullStarColor={'slategray'}
+            ></StarRating>
+          </View>
+      </View>
+  );
+}
+
+
+
 export function Profile({ navigation }) {
+
+  const [ratings, setRatingsData] = useState([]);
+
+
+  const getRatings = async () => {
+        
+    let response = await Api.getCurrentUserRatings();
+
+    //console.log("Getting ratings!!!!!!!!!!!!!!!!!!!")
+    //console.log(response.ratings);
+    setRatingsData(response.ratings);
+
+  }
+
+
+  var roleCount = -1;
+
+  /*
+// Renders a rating component
+const Rating = () => {
+  roleCount++;
+  var roleTitle = ratings[roleCount].role;
+
+  return (
+      <View style={styles.ratingInfo}>
+        <View style={styles.ratingTitleContainer}>
+          <Text style={styles.ratingTitle}>{roleTitle}</Text>
+        </View>
+          <View style={styles.starContainer}>
+            <StarRating style={styles.stars}
+              maxStars={5}
+              rating={ratings[roleCount].rating}
+              starSize={25}
+              emptyStarColor={'slategray'}
+              halfStarColor={'slategray'}
+              fullStarColor={'slategray'}
+            ></StarRating>
+          </View>
+      </View>
+  );
+}
+
+// Component for not rendering rating but keeping count
+const MissingRating = () => {
+  roleCount++;
+
+  return null;
+}*/
+
+const renderItem = ({ item }) => {
+  return (
+    <Rating
+      item={item}
+    />
+  );
+};
+
+
   let username = AuthStore.username;
-  roleCount = -1;
+  //roleCount = -1;
+
+  useEffect(() => {
+    getRatings();
+}, []);
 
   return (
     <View style={styles.container}>
@@ -59,10 +149,11 @@ export function Profile({ navigation }) {
         </View>
       </View>
       <View style={styles.ratingContainer}>
-        {AuthStore.isTenant ? <Rating></Rating> : <MissingRating></MissingRating>}
-        {AuthStore.isLandlord ? <Rating></Rating> : <MissingRating></MissingRating>}
-        {AuthStore.isHandyman ? <Rating></Rating> : <MissingRating></MissingRating>}
-        {AuthStore.isHomeowner ? <Rating></Rating> : <MissingRating></MissingRating>}
+        <FlatList
+          data={ratings}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id.toString()}
+        />
       </View>
       <View style={styles.addressButtonContainer}>
       {AuthStore.isLandlord ?

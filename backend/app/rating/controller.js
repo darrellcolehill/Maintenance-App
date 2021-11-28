@@ -23,7 +23,7 @@ exports.getCurrentUserRatings = (req, res, next) =>
 
     const db = getDb();
     db.all(
-        "SELECT (rowid) AS id,  rating, role, numRatings FROM roles WHERE username = ?",
+        "SELECT (rowid) AS id, rating, role FROM roles WHERE username = ?",
         userToken.username
     )
     .then(data => 
