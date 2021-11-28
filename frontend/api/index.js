@@ -277,7 +277,7 @@ export async function giveUserRatings(requestedUser, rating, role) {
 
 /**
  * @param {Object} data information about the post
- * @param data.PrivacyStatus 0 for a public post, 1 for a private post
+ * @param data.PrivacyStatus 'public' for a public post, 'private' for a private post
  * @param data.ClaimStatus 0 for unclaimed, 1 for claimed
  * @param data.date the post's date
  * @param data.image an image to go with the post. set null for no image
