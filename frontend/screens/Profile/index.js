@@ -8,7 +8,6 @@ import * as Api from "../../api";
 //replace with data from database
 const ROLES = ['Tenant', 'Landlord', 'Handyman', 'Homeowner'];
 const SCORES = [2.5, 4.8, 3.2, 1.6];
-const IS_TENANT = true, IS_LANDLORD = true, IS_HANDYMAN = true, IS_HOMEOWNER = true;
 
 var roleCount;
 
@@ -60,18 +59,18 @@ export function Profile({ navigation }) {
         </View>
       </View>
       <View style={styles.ratingContainer}>
-        {IS_TENANT ? <Rating></Rating> : <MissingRating></MissingRating>}
-        {IS_LANDLORD ? <Rating></Rating> : <MissingRating></MissingRating>}
-        {IS_HANDYMAN ? <Rating></Rating> : <MissingRating></MissingRating>}
-        {IS_HOMEOWNER ? <Rating></Rating> : <MissingRating></MissingRating>}
+        {AuthStore.isTenant ? <Rating></Rating> : <MissingRating></MissingRating>}
+        {AuthStore.isLandlord ? <Rating></Rating> : <MissingRating></MissingRating>}
+        {AuthStore.isHandyman ? <Rating></Rating> : <MissingRating></MissingRating>}
+        {AuthStore.isHomeowner ? <Rating></Rating> : <MissingRating></MissingRating>}
       </View>
-      {IS_LANDLORD ?
       <View style={styles.addressButtonContainer}>
+      {AuthStore.isLandlord ?
         <Button style={styles.addressButton}>
           <Text style={styles.addressButtonText}>View Addresses</Text>
         </Button>
-      </View>
       : null}
+      </View>
       <View style={styles.logoutContainer}>
         <Button style={styles.logoutButton} onPress={() => AuthStore.logout()} mode="contained">
           <Text style={styles.logoutText}>LOGOUT</Text>
