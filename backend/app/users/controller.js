@@ -34,6 +34,8 @@ exports.search = (req, res, next) =>
  * @param {import("express").Response} res 
  * @param {import("express").NextFunction} next 
  */
+
+// TODO: revert back to main's version of setOwnLocation and add changes!!!!!!
 exports.setOwnLocation = (req, res, next) => 
 {
 	const { location } = req.body;
@@ -46,6 +48,32 @@ exports.setOwnLocation = (req, res, next) =>
 	const db = getDb();
 
 	let query = `INSERT INTO owns (owner, location) VALUES (?, ?)`;
+	let args = [username, location];
+
+	db.run(query, args)
+		.then(() => 
+		{
+			res.status(200).send();
+		})
+		.catch((error) => 
+		{
+			return next(error);
+		});
+};
+
+
+// One in main branch
+/*
+exports.setOwnLocation = (req, res, next) => 
+{
+	const { location } = req.body;
+	const { username } = req.user;
+
+	const db = getDb();
+
+	let query = `UPDATE users
+		SET location=?
+		WHERE username=?`;
 	let args = [location, username];
 
 	db.run(query, args)
@@ -58,3 +86,4 @@ exports.setOwnLocation = (req, res, next) =>
 			return next(error);
 		});
 };
+*/

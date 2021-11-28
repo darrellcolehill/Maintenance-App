@@ -106,6 +106,27 @@ exports.getFeed = (req, res, next) =>
 				});
 };
 
+
+
+exports.getLFeed = (req, res, next) =>
+{
+	let failed = false;
+	console.log(req.user.username);
+	const db = getDb();
+
+	db.get("SELECT * FROM owns WHERE owner=?", req.user.username)
+		.then(row => {
+			//return row.location;
+			console.log(row);
+			res.status(200).send({
+				result: row
+			});
+		})
+};
+
+
+// One in main branch
+/*
 exports.getLFeed = (req, res, next) =>
 {
 	let failed = false;
@@ -136,3 +157,4 @@ exports.getLFeed = (req, res, next) =>
 			next(error);
 		});
 };
+*/

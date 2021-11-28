@@ -377,6 +377,8 @@ export async function getFeed() {
   }
 }
 
+
+// TODO: try to use getLFeed in main!!!!!!!
 export async function getLFeed() {
   let token = AuthStore.token;
   try {
@@ -397,11 +399,16 @@ export async function getLFeed() {
   }
 }
 
+
+
+
 /**
  * 
  * @param {Object} data information to send server
  * @param data.location new location
  */
+
+// TODO: try to use setOwnLocation in main!!!!!!!
 export async function setOwnLocation(location) {
   let token = AuthStore.token;
   try {
