@@ -89,7 +89,7 @@ export function CreatePost({ navigation }) {
         icon="camera"
         mode="contained"
         onPress={pickImage}>
-        Choose an image
+        <Text style={styles.text} >CHOOSE AN IMAGE</Text>
       </Button>
       {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
       <RadioButton.Group onValueChange={value => setPrivacyStatus(value)} value={PrivacyStatus}>
@@ -106,7 +106,7 @@ export function CreatePost({ navigation }) {
         icon="send"
         mode="contained"
         onPress={() => handleSubmit()}>
-        Submit
+        <Text style={styles.text} >SUBMIT</Text>
       </Button>
     </ScrollView>
   );
@@ -119,5 +119,9 @@ const styles = StyleSheet.create({
   radioOption: {
     marginVertical: 5,
     marginHorizontal: 10
+  },
+  text: {
+    color: "white",
+    fontWeight: "bold"
   }
 })
