@@ -32,6 +32,12 @@ module.exports = [
         author TEXT,
         caption TEXT,
         location TEXT
+    )`,
+
+	`CREATE TABLE IF NOT EXISTS owns (
+		id INTEGER PRIMARY KEY,
+        owner TEXT,
+        location TEXT
     )`
 ];
 

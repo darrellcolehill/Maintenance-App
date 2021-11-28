@@ -1,4 +1,7 @@
 const { getDb } = require("../database");
+const config = require("../config");
+const jwt = require("jsonwebtoken");
+const jwtSecret = config.jwtSecret;
 
 /**
  * @param {import("express").Request} req 
@@ -34,13 +37,15 @@ exports.search = (req, res, next) =>
 exports.setOwnLocation = (req, res, next) => 
 {
 	const { location } = req.body;
-	const { username } = req.user;
+
+	console.log(req.body.token);
+
+	var username = jwt.verify(req.body.token, jwtSecret);
+	username = username.username;
 
 	const db = getDb();
 
-	let query = `UPDATE users
-		SET location=?
-		WHERE username=?`;
+	let query = `INSERT INTO owns (owner, location) VALUES (?, ?)`;
 	let args = [location, username];
 
 	db.run(query, args)
