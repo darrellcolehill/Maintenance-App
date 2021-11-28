@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
 import { Button, Text, Title, TextInput, Checkbox } from "react-native-paper";
 import SignupForm from "./SignupForm";
 import * as Api from "../../api";
@@ -19,13 +19,32 @@ function Signup({ navigation }) {
 
     const [hasError, sethasError] = useState(true);
 
+    const createOneButtonAlertSuccess = () =>
+    Alert.alert(
+      "Account successfully created!",
+      "We will now redirect you to the login page.",
+      [
+        { text: "OK", onPress: () => navigation.navigate("Login") }
+      ]
+    );
+
+    const createOneButtonAlertInvalid = () =>
+    Alert.alert(
+      "Username already exists",
+      "Please enter a different username.",
+      [
+        { text: "OK", onPress: () => console.log("Username already exists") }
+      ]
+    );
 
     async function submitSignup(username, password, email, isTenant, isLandlord, isHandyman, isHomeowner) {
 
         let response = await Api.signup(username, password, email, isTenant, isLandlord, isHandyman, isHomeowner);
 
-        if(response.message == "Successfully signed up!") navigation.navigate("Login");
-        else navigation.navigate("Signup");
+        if(response.message == "Successfully signed up!"){
+          createOneButtonAlertSuccess();
+        }
+        else createOneButtonAlertInvalid();
     }
 
 
