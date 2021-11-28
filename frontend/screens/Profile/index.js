@@ -73,15 +73,9 @@ export function Profile({ navigation }) {
       </View>
       : null}
       <View style={styles.logoutContainer}>
-<<<<<<< Updated upstream
-      <Button style={styles.logoutButton} onPress={() => AuthStore.logout()} mode="contained">
-        <Text style={styles.logoutText}>LOGOUT</Text>
-      </Button>
-=======
         <Button style={styles.logoutButton} onPress={() => AuthStore.logout()} mode="contained">
           <Text style={styles.logoutText}>LOGOUT</Text>
         </Button>
->>>>>>> Stashed changes
       </View>
     </View>
   );
