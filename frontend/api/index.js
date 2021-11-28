@@ -11,7 +11,7 @@ function delay(ms) {
 
 
 
-const URL = 'http://40a5-73-23-154-60.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
+const URL = 'http://7311-72-188-118-58.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
 
 
 
@@ -450,4 +450,22 @@ export async function getLBuildings() {
   }
 }
 
-// TODO: add getLBuildingPost
+export async function getLBuildingsPosts(buildingName) {
+  let token = AuthStore.token;
+  try {
+    const response = await fetch(URL + '/posts/getLBuildingsPosts/' + buildingName, {
+      method: 'GET',
+      headers: {
+        'Accept': '*/*',  // It can be used to overcome cors errors
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }
+    });
+
+    const json = await response.json();
+    console.log(json); // TODO: delete later after testing
+    return json;
+  } catch (error) {
+    console.error(error);
+  }
+}

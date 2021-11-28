@@ -21,6 +21,7 @@ import { Profile } from "../screens/Profile";
 import { LandlordFeed } from "../screens/LandlordFeed";
 import { AuthStore } from "../stores/auth";
 import { PostContentL } from "../screens/LandlordFeed/PostContentL";
+import { PostsInLocation } from "../screens/LandlordFeed/PostsInLocation";
 import { AddLocation } from "../screens/Profile/AddLocation";
 
 const Tab = createBottomTabNavigator();
@@ -62,6 +63,7 @@ function LandlordFeedNav() {
     <Stack.Navigator>
       <Stack.Screen name="Personalized Feed" component={LandlordFeed} />
       <Stack.Screen name="Tenant post" component={PostContentL} />
+      <Stack.Screen name="Posts in location" component={PostsInLocation} />
     </Stack.Navigator>
   );
 }

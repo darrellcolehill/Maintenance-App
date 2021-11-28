@@ -1,75 +1,52 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { View, StyleSheet, FlatList } from "react-native";
-import { Text, Button, TextInput, Title } from "react-native-paper";
+import { View, StyleSheet, FlatList, TouchableOpacity } from "react-native";
+import { Text, Button, TextInput, Title, List } from "react-native-paper";
 import { AuthStore } from "../../stores/auth";
-import PostItem from "../Home/PostItem";
 import * as Api from "../../api"
 
+// note: we use interchangeably the words 'building', 'location', and 'property'
 export function LandlordFeed({ navigation }) {
   let username = AuthStore.username;
-  let [posts, setPosts] = useState([])
+  let [items, setItems] = useState([]) // array of objects {id: xxx, location: xxx}
   let [isRefreshing, setIsRefreshing] = useState(false)
-  let [location, setLocation] = useState("");
-
 
   const getBuildings = async () => {
-    //console.log("GETTING BUILDINGS");
     let data = await Api.getLBuildings();
-    //console.log(data.result);
+    let result = data.result;
+    setItems(result);
     setIsRefreshing(false)
   }
-
-
-  const getPosts = async () => {
-    let data = await Api.getLFeed();
-    if (data.message === "NEED_LOCATION") {
-      setPosts(data.message);
-    } else {
-      setPosts(data.result)
-    }
-    setIsRefreshing(false)
-  }
-
-  const submitLocation = async () => {
-    await Api.setOwnLocation({ location: location });
-    await getPosts();
-  }
-
-  const renderItem = ({ item }) => {
-    return (
-      <PostItem
-        item={item}
-        onPress={() => navigation.navigate("Tenant post", { post: item })}
-      />
-    );
-  };
 
   useEffect(() => {
-    getPosts();
-    //getBuildings();
+    getBuildings();
   }, []);
+
+  const renderItem = ({ item }) => {
+    const { location } = item;
+    return (
+      <TouchableOpacity
+      onPress={() => navigation.navigate("Posts in location", { location: location })}
+      >
+        <List.Item
+          title={location}
+          left={props => <List.Icon {...props} icon="home" />}
+        />
+      </TouchableOpacity>
+    );
+  }
 
   return (
     <View style={styles.container}>
-      <Title>Posts from users in your building:</Title>
-      {posts === "NEED_LOCATION" ? (
-        <>
-          <Text>Please enter your location.</Text>
-          <TextInput placeholder="Location" onChangeText={text => setLocation(text)} />
-          <Button mode="contained" icon="floppy" onPress={() => submitLocation()}>
-            <Text style={styles.logout}>SAVE</Text>
-          </Button>
-        </>
-      ) : (
-        <FlatList
-          data={posts}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id.toString()}
-          onRefresh={() => { setIsRefreshing(true); getPosts(); }}
-          refreshing={isRefreshing}
-        />
-      )}
+      <Title>Your properties</Title>
+      <Text>Tap on a property to see all posts related to it!</Text>
+      <FlatList
+        data={items}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+        onRefresh={() => { setIsRefreshing(true); getBuildings(); }}
+        refreshing={isRefreshing}
+      />
     </View>
   );
 }
