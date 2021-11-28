@@ -48,7 +48,7 @@ export function LandlordFeed({ navigation }) {
           <Text>Please enter your location.</Text>
           <TextInput placeholder="Location" onChangeText={text => setLocation(text)} />
           <Button mode="contained" icon="floppy" onPress={() => submitLocation()}>
-            Save
+            <Text style={styles.logout}>SAVE</Text>
           </Button>
         </>
       ) : (
@@ -68,4 +68,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  logout: {
+    color: "white",
+    fontWeight: "bold",
+  }
 });
