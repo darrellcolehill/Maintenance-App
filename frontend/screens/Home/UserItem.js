@@ -10,7 +10,7 @@ export default function UserItem({ item, onPress }) {
   
         <List.Item
           title={username}
-          left={props => <List.Icon {...props} icon="folder" />}
+          left={props => <List.Icon {...props} icon="account" />}
         />
   
       </TouchableOpacity>
