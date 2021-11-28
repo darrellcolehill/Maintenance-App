@@ -30,8 +30,10 @@ export function AddLocation( {navigation }) {
         if(location == null || location == ""){
             createOneButtonAlertInvalid();
         }
+        else{
         await Api.setOwnLocation({ location: location }); /* need to change to addLocation */
         createOneButtonAlertSuccess();
+        }
       }
     return(
         <View style={styles.container}>
