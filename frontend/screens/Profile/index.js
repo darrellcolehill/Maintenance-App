@@ -35,7 +35,7 @@ export function Profile( {navigation} ) {
         </View>
       </View>
       <View style={styles.logoutContainer}>
-        {AuthStore.isLandlord &&  /* checks if user is landlord*/
+        {AuthStore.isLandlord &&  /* checks if user is landlord, then renders button! */
           <Button style={styles.logoutButton} onPress={() =>  navigation.navigate("Add a location")}>
             <Text style={styles.logoutText}>ADD A LOCATION</Text>
           </Button>
