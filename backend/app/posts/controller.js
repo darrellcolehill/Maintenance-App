@@ -107,28 +107,6 @@ exports.getFeed = (req, res, next) =>
 };
 
 
-
-
-/*
-exports.getLFeed = (req, res, next) =>
-{
-	let failed = false;
-	console.log(req.user.username);
-	const db = getDb();
-
-	db.get("SELECT * FROM owns WHERE owner=?", req.user.username)
-		.then(row => {
-			//return row.location;
-			console.log(row);
-			res.status(200).send({
-				result: row
-			});
-		})
-};
-*/
-
-
-
 // gets a list of all the buildings the landlord owns
 exports.getLBuildings = (req, res, next) =>
 {
@@ -150,30 +128,6 @@ exports.getLBuildings = (req, res, next) =>
 		next(error);
 	});
 };
-
-
-// Gets all the post for a specific building that a landlord owns
-exports.getLBuildingsPost = (req, res, next) =>
-{
-	let failed = false;
-	const db = getDb();
-
-
-	console.log(req.user.username);
-
-	db.all("SELECT * from posts WHERE author=?", req.user.username)
-	.then(rows => 
-	{
-		res.status(200).send({
-			result: rows
-		});
-	})
-	.catch(error => 
-	{
-		return next(error);
-	});
-};
-
 
 
 exports.getLFeed = (req, res, next) =>
