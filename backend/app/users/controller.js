@@ -46,7 +46,7 @@ exports.setOwnLocation = (req, res, next) =>
 	const db = getDb();
 
 	let query = `INSERT INTO owns (owner, location) VALUES (?, ?)`;
-	let args = [location, username];
+	let args = [username, location];
 
 	db.run(query, args)
 		.then(() => 
