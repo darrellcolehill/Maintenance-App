@@ -377,7 +377,6 @@ export async function getFeed() {
   }
 }
 
-
 export async function getLFeed() {
   let token = AuthStore.token;
   try {
@@ -398,17 +397,12 @@ export async function getLFeed() {
   }
 }
 
-
-
-
 /**
  * 
  * @param {Object} data information to send server
  * @param data.location new location
  */
-
-
-export async function setOwnLocation(location) {
+ export async function setOwnLocation(location) {
   let token = AuthStore.token;
   try {
     const response = await fetch(URL + '/users/setOwnLocation', {
