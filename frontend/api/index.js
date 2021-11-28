@@ -11,7 +11,7 @@ function delay(ms) {
 
 
 
-const URL = 'http://ed1f-72-188-118-58.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
+const URL = 'http://40a5-73-23-154-60.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
 
 
 
@@ -378,7 +378,6 @@ export async function getFeed() {
 }
 
 
-// TODO: try to use getLFeed in main!!!!!!!
 export async function getLFeed() {
   let token = AuthStore.token;
   try {
@@ -408,7 +407,7 @@ export async function getLFeed() {
  * @param data.location new location
  */
 
-// TODO: try to use setOwnLocation in main!!!!!!!
+
 export async function setOwnLocation(location) {
   let token = AuthStore.token;
   try {
@@ -416,18 +415,39 @@ export async function setOwnLocation(location) {
       method: 'POST',
       headers: {
         'Accept': '*/*',  // It can be used to overcome cors errors
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
       },
       body: JSON.stringify({
         token: token,
         location: location
      })
     });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+
+// TODO: add getLBuildings
+export async function getLBuildings() {
+  let token = AuthStore.token;
+  try {
+    const response = await fetch(URL + '/posts/getLBuildings', {
+      method: 'GET',
+      headers: {
+        'Accept': '*/*',  // It can be used to overcome cors errors
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }
+    });
 
     const json = await response.json();
-    console.log(json); // TODO: delete after testing
+    console.log(json); // TODO: delete later after testing
     return json;
   } catch (error) {
     console.error(error);
   }
 }
+
+// TODO: add getLBuildingPost

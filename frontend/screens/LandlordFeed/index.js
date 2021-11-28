@@ -12,6 +12,15 @@ export function LandlordFeed({ navigation }) {
   let [isRefreshing, setIsRefreshing] = useState(false)
   let [location, setLocation] = useState("");
 
+
+  const getBuildings = async () => {
+    //console.log("GETTING BUILDINGS");
+    let data = await Api.getLBuildings();
+    //console.log(data.result);
+    setIsRefreshing(false)
+  }
+
+
   const getPosts = async () => {
     let data = await Api.getLFeed();
     if (data.message === "NEED_LOCATION") {
@@ -38,6 +47,7 @@ export function LandlordFeed({ navigation }) {
 
   useEffect(() => {
     getPosts();
+    //getBuildings();
   }, []);
 
   return (

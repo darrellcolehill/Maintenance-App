@@ -31,7 +31,7 @@ export function AddLocation( {navigation }) {
             createOneButtonAlertInvalid();
         }
         else{
-        await Api.setOwnLocation({ location: location }); /* need to change to addLocation */
+        await Api.setOwnLocation(location); /* need to change to addLocation */
         createOneButtonAlertSuccess();
         }
       }

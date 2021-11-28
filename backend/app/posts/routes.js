@@ -43,4 +43,11 @@ router.get("/getLFeed",
 	posts.getLFeed
 );
 
+router.get("/getLBuildings",
+	jwt({ secret: config.jwtSecret, algorithms: ["HS256"] }),
+	posts.getLBuildings
+);
+
+
+
 module.exports = router;
