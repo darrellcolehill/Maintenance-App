@@ -11,7 +11,7 @@ function delay(ms) {
 
 
 
-const URL = 'http://f16f-98-238-8-179.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
+const URL = 'http://ed1f-72-188-118-58.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
 
 
 
@@ -417,9 +417,9 @@ export async function setOwnLocation(location) {
      })
     });
 
-    console.log(response); // TODO: delete after testing
-
-
+    const json = await response.json();
+    console.log(json); // TODO: delete after testing
+    return json;
   } catch (error) {
     console.error(error);
   }
