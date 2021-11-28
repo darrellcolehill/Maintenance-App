@@ -113,22 +113,23 @@ exports.getFeed = (req, res, next) =>
 // gets a list of all the buildings the landlord owns
 exports.getLBuildings = (req, res, next) =>
 {
-	const { username } = req.user;
+	let failed = false;
 	const db = getDb();
 
-	// Get all the locations that the landlord owns
-	db.all("SELECT id, location FROM owns WHERE owner = ?", username)
-		.then(rows => 
-		{
-			res.status(200).send({
-				result: rows
-			});
+	console.log(req.user.username);
 
-		})
-		.catch(error => 
-		{
-			next(error);
+	// Get all the locations that the landlord owns
+	db.all("SELECT * FROM owns WHERE owner = ?", req.user.username)
+	.then(data => {
+		console.log(data);
+		res.status(200).send({
+			result: data
 		});
+
+	})
+	.catch(error => {
+		next(error);
+	});
 };
 
 
