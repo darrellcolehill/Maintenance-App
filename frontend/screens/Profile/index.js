@@ -5,13 +5,6 @@ import StarRating from 'react-native-star-rating';
 import { AuthStore } from "../../stores/auth";
 import * as Api from "../../api";
 
-// Component for not rendering rating but keeping count
-const MissingRating = () => {
-  roleCount++;
-
-  return null;
-}
-
 function Rating ({item}) {
 
   console.log(item.rating)
@@ -36,10 +29,9 @@ function Rating ({item}) {
   );
 }
 
-export function Profile({ navigation }) {
+export function Profile() {
 
   const [ratings, setRatingsData] = useState([]);
-
 
   const getRatings = async () => {
         
@@ -50,9 +42,6 @@ export function Profile({ navigation }) {
     setRatingsData(response.ratings);
 
   }
-
-
-  var roleCount = -1;
 
 const renderItem = ({ item }) => {
   return (

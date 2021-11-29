@@ -11,7 +11,7 @@ function delay(ms) {
 
 
 
-const URL = 'http://789d-73-23-154-60.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
+const URL = 'http://a89d-97-71-243-227.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
 
 
 
@@ -210,7 +210,7 @@ export async function getUserRatings(requestedUser) {
       
     const userToken = AuthStore.token;
 
-    const response = await fetch(URL + '/rating/getUserRating', {
+    const response = await fetch(URL + '/rating/getUserRatings', {
 
        method: 'POST',
        headers: {

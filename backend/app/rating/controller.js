@@ -55,7 +55,7 @@ exports.getUserRatings = (req, res, next) =>
 
 
     db.all(
-        "SELECT rating, role, numRatings FROM roles WHERE username = ?",
+        "SELECT (rowid) AS id, rating, role FROM roles WHERE username = ?",
         requestedUser
     )
     .then(data => 
