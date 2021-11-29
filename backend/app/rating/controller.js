@@ -90,7 +90,7 @@ exports.giveUserRatings = (req, res, next) =>
     rating = parseInt(rating);
     const role = req.body.role;
 
-    
+    console.log(requestedUser + ' ' + rating + ' ' + role);
 
     if(!requestedUser || !rating || !role)
     {
