@@ -72,6 +72,8 @@ exports.setOwnLocation = (req, res, next) =>
 	var username = jwt.verify(req.body.token, jwtSecret);
 	username = username.username;
 
+	console.log(username + " " + location);
+
 	const db = getDb();
 
 	let query = `INSERT INTO owns (owner, location) VALUES (?, ?)`;

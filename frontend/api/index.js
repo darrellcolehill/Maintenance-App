@@ -11,7 +11,7 @@ function delay(ms) {
 
 
 
-const URL = 'http://a89d-97-71-243-227.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
+const URL = 'http://fe7e-76-78-236-214.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
 
 
 
@@ -403,7 +403,7 @@ export async function getLFeed() {
  * @param {Object} data information to send server
  * @param data.location new location
  */
-export async function setOwnLocation(data) {
+ export async function setOwnLocation(location) {
   let token = AuthStore.token;
   try {
     const response = await fetch(URL + '/users/setOwnLocation', {
@@ -413,8 +413,53 @@ export async function setOwnLocation(data) {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + token
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify({
+        token: token,
+        location: location
+     })
     });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+
+// TODO: add getLBuildings
+export async function getLBuildings() {
+  let token = AuthStore.token;
+  try {
+    const response = await fetch(URL + '/posts/getLBuildings', {
+      method: 'GET',
+      headers: {
+        'Accept': '*/*',  // It can be used to overcome cors errors
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }
+    });
+
+    const json = await response.json();
+    console.log(json); // TODO: delete later after testing
+    return json;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getLBuildingsPosts(buildingName) {
+  let token = AuthStore.token;
+  try {
+    const response = await fetch(URL + '/posts/getLBuildingsPosts/' + buildingName, {
+      method: 'GET',
+      headers: {
+        'Accept': '*/*',  // It can be used to overcome cors errors
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }
+    });
+
+    const json = await response.json();
+    console.log(json); // TODO: delete later after testing
+    return json;
   } catch (error) {
     console.error(error);
   }
