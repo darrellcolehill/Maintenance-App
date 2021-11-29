@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Image, ScrollView } from "react-native";
-import { Title, Text } from "react-native-paper";
+import { Title, Text, Button } from "react-native-paper";
 
 // renders a full message. We come here when user clicks a message from the list
 export function PostContentL({ route }) {
@@ -26,6 +26,9 @@ export function PostContentL({ route }) {
       <Text>Claim status: {ClaimStatus}</Text>
       <Text>Privacy status: {PrivacyStatus}</Text>
       <Text>Location: {location}</Text>
+      <Button Style={styles.claimButton}>
+        <Text Style={styles.claimText}>Mark As Claimed</Text>
+      </Button>
     </View>
   );
 }
@@ -33,7 +36,8 @@ export function PostContentL({ route }) {
 const styles = StyleSheet.create({
   container: {
     margin: 10,
-    flex: 2
+    flex: 1,
+    backgroundColor: 'yellow',
   },
   box: {
     borderColor: "black",
@@ -48,6 +52,14 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     alignSelf: "center",
-    margin: 5
-  }
+    margin: 5,
+  },
+
+  claimButton: {
+    backgroundColor: 'red',
+  },
+
+  claimText: {
+
+  },
 })
