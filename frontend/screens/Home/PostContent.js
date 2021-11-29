@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Image, ScrollView } from "react-native";
 import { Title, Text } from "react-native-paper";
+import { AuthStore } from "../../stores/auth";
 
 // renders a full message. We come here when user clicks a message from the list
 export function PostContent({ route }) {
@@ -14,6 +15,26 @@ export function PostContent({ route }) {
   }
   const { date, image, author, caption,
     location, PrivacyStatus, ClaimStatus } = post;
+  
+  if(AuthStore.isHandyman)
+  {
+    return (
+      <View style={styles.container}>
+        <Title>Posted by {author} on {date}</Title>
+        {image && <Image source={{ uri: image }} style={styles.image} />}
+        <View style={styles.box}>
+          <ScrollView>
+            <Text style={styles.caption}>{caption}</Text>
+          </ScrollView>
+        </View>
+        <Text>Claim status: {ClaimStatus}</Text>
+        <Text>Privacy status: {PrivacyStatus}</Text>
+        <Text>Location: {location}</Text>
+        ADD BUTTON HERE
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <Title>Posted by {author} on {date}</Title>
