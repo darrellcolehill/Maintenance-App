@@ -5,45 +5,12 @@ import StarRating from 'react-native-star-rating';
 import { AuthStore } from "../../stores/auth";
 import * as Api from "../../api";
 
-//replace with data from database
-const ROLES = ['Tenant', 'Landlord', 'Handyman', 'Homeowner'];
-const SCORES = [2.5, 4.8, 3.2, 1.6];
-
-/*
-var roleCount;
-
-// Renders a rating component
-const Rating = () => {
-  roleCount++;
-  var roleTitle = ROLES[roleCount];
-
-  return (
-      <View style={styles.ratingInfo}>
-        <View style={styles.ratingTitleContainer}>
-          <Text style={styles.ratingTitle}>{roleTitle}</Text>
-        </View>
-          <View style={styles.starContainer}>
-            <StarRating style={styles.stars}
-              maxStars={5}
-              rating={SCORES[roleCount]}
-              starSize={25}
-              emptyStarColor={'slategray'}
-              halfStarColor={'slategray'}
-              fullStarColor={'slategray'}
-            ></StarRating>
-          </View>
-      </View>
-  );
-}*/
-
 // Component for not rendering rating but keeping count
 const MissingRating = () => {
   roleCount++;
 
   return null;
 }
-
-
 
 function Rating ({item}) {
 
@@ -62,13 +29,12 @@ function Rating ({item}) {
               emptyStarColor={'slategray'}
               halfStarColor={'slategray'}
               fullStarColor={'slategray'}
+              disabled={true}
             ></StarRating>
           </View>
       </View>
   );
 }
-
-
 
 export function Profile({ navigation }) {
 
@@ -88,38 +54,6 @@ export function Profile({ navigation }) {
 
   var roleCount = -1;
 
-  /*
-// Renders a rating component
-const Rating = () => {
-  roleCount++;
-  var roleTitle = ratings[roleCount].role;
-
-  return (
-      <View style={styles.ratingInfo}>
-        <View style={styles.ratingTitleContainer}>
-          <Text style={styles.ratingTitle}>{roleTitle}</Text>
-        </View>
-          <View style={styles.starContainer}>
-            <StarRating style={styles.stars}
-              maxStars={5}
-              rating={ratings[roleCount].rating}
-              starSize={25}
-              emptyStarColor={'slategray'}
-              halfStarColor={'slategray'}
-              fullStarColor={'slategray'}
-            ></StarRating>
-          </View>
-      </View>
-  );
-}
-
-// Component for not rendering rating but keeping count
-const MissingRating = () => {
-  roleCount++;
-
-  return null;
-}*/
-
 const renderItem = ({ item }) => {
   return (
     <Rating
@@ -128,9 +62,7 @@ const renderItem = ({ item }) => {
   );
 };
 
-
   let username = AuthStore.username;
-  //roleCount = -1;
 
   useEffect(() => {
     getRatings();
