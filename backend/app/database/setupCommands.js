@@ -38,9 +38,7 @@ module.exports = [
 		id INTEGER PRIMARY KEY,
         owner TEXT,
         location TEXT
-    )`,
-
-	"DELETE FROM messages WHERE sender = 'bobTheBuilder'"
+    )`
 ];
 
 
