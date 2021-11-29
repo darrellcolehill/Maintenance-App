@@ -4,9 +4,10 @@ import { Text,} from "react-native-paper";
 import StarRating from 'react-native-star-rating';
 import * as Api from "../../api";
 
-function Rating ({item}) {
+function Rating ({item, user}) {
 
-  console.log(item.rating)
+  
+
   return (
       <View style={styles.ratingInfo}>
         <View style={styles.ratingTitleContainer}>
@@ -20,6 +21,7 @@ function Rating ({item}) {
               emptyStarColor={'slategray'}
               halfStarColor={'slategray'}
               fullStarColor={'slategray'}
+              selectedStar={(rating) => Api.giveUserRatings(user, rating, item.role)}
             ></StarRating>
           </View>
       </View>
@@ -28,7 +30,7 @@ function Rating ({item}) {
 }
 
 export function UserContent({ route }) {
-  const user  = route.params.user;
+  const user = route.params.user;
 
   const [ratings, setRatingsData] = useState([]);
 
@@ -43,6 +45,7 @@ const renderItem = ({ item }) => {
   return (
     <Rating
       item={item}
+      user={user.username}
     />
   );
 };
