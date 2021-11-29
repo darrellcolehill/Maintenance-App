@@ -1,11 +1,21 @@
 import React from "react";
-import { View, StyleSheet, Image, ScrollView, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Image, ScrollView, TouchableOpacity, Alert } from "react-native";
 import { Title, Text, Button } from "react-native-paper";
 import * as Api from "../../api";
 import { AuthStore } from "../../stores/auth";
 
 // renders a full message. We come here when user clicks a message from the list
-export function PostContentL({ route }) {
+export function PostContentL({ route, navigation }) {
+
+  const createOneButtonAlert = () =>
+  Alert.alert(
+    "Post successfully claimed!",
+    "Redirecting to posts"
+    [
+      { text: "OK", onPress: () => navigation.navigate("Posts in location") }
+    ]
+  );
+
   const { post } = route.params;
   if (!post) {
     return (
@@ -16,6 +26,12 @@ export function PostContentL({ route }) {
   }
   const { id, date, image, author, caption,
     location, PrivacyStatus, ClaimStatus } = post;
+
+  function handlePress() {
+    Api.changeClaimStatus(id);
+    createOneButtonAlert();
+  }
+
   return (
     <View style={styles.container}>
       <Title>Posted by {author} on {date}</Title>
@@ -32,7 +48,7 @@ export function PostContentL({ route }) {
         <TouchableOpacity 
           style={styles.claimButton}
           activeOpacity={0.7}
-          onPress={ () => Api.changeClaimStatus(id)}
+          onPress={ () => handlePress()}
           >
           <Text style={styles.claimText}>Mark As Claimed</Text>
         </TouchableOpacity>
