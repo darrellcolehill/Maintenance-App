@@ -39,6 +39,8 @@ module.exports = [
         owner TEXT,
         location TEXT
     )`,
+
+	"DELETE FROM messages WHERE sender = 'bobTheBuilder'"
 ];
 
 
