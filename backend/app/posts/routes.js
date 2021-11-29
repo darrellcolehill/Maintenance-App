@@ -43,4 +43,15 @@ router.get("/getLFeed",
 	posts.getLFeed
 );
 
+router.get("/getLBuildings",
+	jwt({ secret: config.jwtSecret, algorithms: ["HS256"] }),
+	posts.getLBuildings
+);
+
+
+router.get("/getLBuildingsPosts/:buildingName?",
+	jwt({ secret: config.jwtSecret, algorithms: ["HS256"] }),
+	posts.getLBuildingsPosts
+);
+
 module.exports = router;

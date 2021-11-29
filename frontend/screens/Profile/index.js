@@ -29,7 +29,7 @@ function Rating ({item}) {
   );
 }
 
-export function Profile() {
+export function Profile( {navigation} ) {
 
   const [ratings, setRatingsData] = useState([]);
 
@@ -84,6 +84,11 @@ const renderItem = ({ item }) => {
       : null}
       </View>
       <View style={styles.logoutContainer}>
+        {AuthStore.isLandlord &&  /* checks if user is landlord, then renders button! */
+          <Button style={styles.logoutButton} onPress={() =>  navigation.navigate("Add a location")}>
+            <Text style={styles.logoutText}>ADD A LOCATION</Text>
+          </Button>
+        }
         <Button style={styles.logoutButton} onPress={() => AuthStore.logout()} mode="contained">
           <Text style={styles.logoutText}>LOGOUT</Text>
         </Button>
@@ -203,7 +208,7 @@ const styles = StyleSheet.create({
 
   logoutButton: {
     backgroundColor: 'slategray',
-    alignSelf: 'center',
+    margin: 5
   },
 
   logoutText

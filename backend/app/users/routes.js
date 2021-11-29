@@ -24,7 +24,7 @@ router.get("/search/:username?",
  * on success, responds with status 200
  */
 router.post("/setOwnLocation",
-	jwt({ secret: config.jwtSecret, algorithms: ["HS256"] }),
+	//jwt({ secret: config.jwtSecret, algorithms: ["HS256"] }),
 	users.setOwnLocation
 );
 module.exports = router;
