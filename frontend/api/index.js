@@ -11,7 +11,7 @@ function delay(ms) {
 
 
 
-const URL = 'http://71bf-104-136-37-111.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
+const URL = 'http://5118-104-136-37-111.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
 
 
 
@@ -508,7 +508,7 @@ export async function makeOffer(offer, author, buildingLocation) {
   if(response.message == "Success")
   {
     // Sends message to owner of location (may or maynot be successful since not all location will have owners)
-    sendMessage(owner, message)
+    sendMessage(response.owner, message)
   }
   return "Success";
 }
