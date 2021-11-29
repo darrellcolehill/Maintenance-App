@@ -173,9 +173,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignSelf: "center",
     justifyContent: "center",
-    height: "40%",
-    width: "40%",
-    top: "5%",
+    height: 150,
+    width: 150,
+    top: "10%",
   },
   registerButton: {
     width: "80%",
