@@ -23,6 +23,7 @@ import { AuthStore } from "../stores/auth";
 import { PostContentL } from "../screens/LandlordFeed/PostContentL";
 import { PostsInLocation } from "../screens/LandlordFeed/PostsInLocation";
 import { AddLocation } from "../screens/Profile/AddLocation";
+import { PlaceOffer } from "../screens/Home/PlaceOffer";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -35,6 +36,7 @@ function HomeNav() {
       <Stack.Screen name="Post content" component={PostContent} />
       <Stack.Screen name="User content" component={UserContent} />
       <Stack.Screen name="Search" component={Search} />
+      <Stack.Screen name="Place an Offer" component={PlaceOffer} />
     </Stack.Navigator>
   );
 }
