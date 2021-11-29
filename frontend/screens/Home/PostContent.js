@@ -1,9 +1,9 @@
-import React from "react";
-import { View, StyleSheet, Image, ScrollView } from "react-native";
-import { Title, Text } from "react-native-paper";
+import React, { useState } from "react";
+import { View, StyleSheet, Image, ScrollView, Button } from "react-native";
+import { Title, Text, BottomNavigation } from "react-native-paper";
 
 // renders a full message. We come here when user clicks a message from the list
-export function PostContent({ route }) {
+export function PostContent({ route , navigation }) {
   const { post } = route.params;
   if (!post) {
     return (
@@ -12,8 +12,11 @@ export function PostContent({ route }) {
       </View>
     )
   }
+
   const { date, image, author, caption,
     location, PrivacyStatus, ClaimStatus } = post;
+  const [offer, setOffer] = useState("");
+
   return (
     <View style={styles.container}>
       <Title>Posted by {author} on {date}</Title>
@@ -26,6 +29,12 @@ export function PostContent({ route }) {
       <Text>Claim status: {ClaimStatus}</Text>
       <Text>Privacy status: {PrivacyStatus}</Text>
       <Text>Location: {location}</Text>
+      <View style={styles.container}>
+        <Button 
+          title="PLACE OFFER"
+          onPress={() => navigation.navigate("Place an Offer", {post: post})}
+        />
+      </View>
     </View>
   );
 }
@@ -49,5 +58,15 @@ const styles = StyleSheet.create({
     height: 200,
     alignSelf: "center",
     margin: 4,
+  },
+  input: {
+    alignSelf: "center",
+    borderWidth: 1,
+    width: "70%",
+    height: "5%",
+    backgroundColor: "white",
+    padding: 5,
+    margin: 2,
+    flex: 0.0275,
   },
 })
