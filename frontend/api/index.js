@@ -11,7 +11,7 @@ function delay(ms) {
 
 
 
-const URL = 'http://fe7e-76-78-236-214.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
+const URL = 'http://b472-104-136-37-111.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
 
 
 
@@ -497,6 +497,7 @@ export async function getBuildingOwner(location) {
 export async function makeOffer(offer, author, buildingLocation) {
   let token = AuthStore.token;
 
+  if(offer === ""){ return "Invalid"}
   console.log(offer + " " + author + " " + buildingLocation);
 
   // Sends message to author
@@ -509,7 +510,7 @@ export async function makeOffer(offer, author, buildingLocation) {
     // Sends message to owner of location (may or maynot be successful since not all location will have owners)
     sendMessage(owner, message)
   }
-
+  return "Success";
 }
 
 
