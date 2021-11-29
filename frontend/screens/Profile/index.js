@@ -76,13 +76,6 @@ const renderItem = ({ item }) => {
           keyExtractor={(item) => item.id.toString()}
         />
       </View>
-      <View style={styles.addressButtonContainer}>
-      {AuthStore.isLandlord ?
-        <Button style={styles.addressButton}>
-          <Text style={styles.addressButtonText}>View Addresses</Text>
-        </Button>
-      : null}
-      </View>
       <View style={styles.logoutContainer}>
         <Button style={styles.logoutButton} onPress={() => AuthStore.logout()} mode="contained">
           <Text style={styles.logoutText}>LOGOUT</Text>
@@ -174,24 +167,6 @@ const styles = StyleSheet.create({
 
   stars: {
     alignSelf: 'center',
-  },
-
-  addressButtonContainer: {
-    height: '15%',
-    justifyContent: 'center',
-    paddingTop: 5,
-    paddingBottom: 5,
-  },
-
-  addressButton: {
-    justifyContent: "center",
-    alignSelf: 'center',
-    backgroundColor: 'slategray',
-  },
-
-  addressButtonText: {
-    fontWeight: 'bold',
-    color: 'white',
   },
 
   logoutContainer: {
