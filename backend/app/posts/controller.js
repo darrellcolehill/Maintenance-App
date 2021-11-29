@@ -198,3 +198,54 @@ exports.getLFeed = (req, res, next) =>
 		});
 };
 
+
+exports.getBuildingOwner = (req, res, next) => 
+{
+	const db = getDb();
+	//console.log(req.body.location);
+
+	db.get("SELECT owner from owns WHERE location=?", req.body.location)
+	.then(row => 
+	{
+		if(!row)
+		{
+			res.status(200).send({
+				message: "owner does not exist"
+			});
+		}
+		else
+		{
+			res.status(200).send({
+				message: "Success",
+				owner: row.owner
+			});
+		}
+	})
+	.catch(error => 
+	{
+		next(error);
+	});
+
+}
+
+
+exports.changeClaimStatus = (req, res, next) => {
+	const db = getDb();
+
+	db.run("UPDATE posts SET ClaimStatus = 1 WHERE id = ?", req.body.postID)
+	.then(row => 
+	{
+		if(!row)
+		{
+			res.status(200).send({
+				message: "error changing claim status for post"
+			});
+		}
+		else
+		{
+			res.status(200).send({
+				message: "Success",
+			});
+		}
+	});
+}

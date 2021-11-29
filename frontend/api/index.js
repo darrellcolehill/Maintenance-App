@@ -11,7 +11,7 @@ function delay(ms) {
 
 
 
-const URL = 'http://fe7e-76-78-236-214.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
+const URL = 'http://b472-104-136-37-111.ngrok.io'; // NOTE: for some reason, fetch will not let you use local host
 
 
 
@@ -463,4 +463,80 @@ export async function getLBuildingsPosts(buildingName) {
   } catch (error) {
     console.error(error);
   }
+}
+
+
+
+export async function getBuildingOwner(location) {
+  let token = AuthStore.token;
+  try {
+    const response = await fetch(URL + '/posts/getBuildingOwner', {
+      method: 'POST',
+      headers: {
+        'Accept': '*/*',  // It can be used to overcome cors errors
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify({
+        token: token,
+        location: location
+     })
+    });
+
+    const json = await response.json();
+    console.log(json);
+    return json;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+
+
+// Allows handymen to make offers on post when viewing searched post
+export async function makeOffer(offer, author, buildingLocation) {
+  let token = AuthStore.token;
+
+  if(offer === ""){ return "Invalid"}
+  console.log(offer + " " + author + " " + buildingLocation);
+
+  // Sends message to author
+  sendMessage(author, offer);
+
+  var response = getBuildingOwner(buildingLocation);
+
+  if(response.message == "Success")
+  {
+    // Sends message to owner of location (may or maynot be successful since not all location will have owners)
+    sendMessage(owner, message)
+  }
+  return "Success";
+}
+
+
+
+// ALlow landlords to change the claim status of a post that is displayed in their landlord feed. 
+export async function changeClaimStatus(postID) {
+
+  let token = AuthStore.token;
+  try {
+    const response = await fetch(URL + '/posts/changeClaimStatus', {
+      method: 'POST',
+      headers: {
+        'Accept': '*/*',  // It can be used to overcome cors errors
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify({
+        postID: postID
+     })
+    });
+
+    const json = await response.json();
+    console.log(json);
+    return json;
+  } catch (error) {
+    console.error(error);
+  }
+
 }

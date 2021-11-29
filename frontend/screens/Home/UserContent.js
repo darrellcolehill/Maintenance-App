@@ -1,30 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Image, FlatList} from "react-native";
-import { Text,} from "react-native-paper";
+import { View, StyleSheet, Image, FlatList } from "react-native";
+import { Text, } from "react-native-paper";
 import StarRating from 'react-native-star-rating';
 import * as Api from "../../api";
 
-function Rating ({item, user}) {
+function Rating({ item, user }) {
 
-  
+
 
   return (
-      <View style={styles.ratingInfo}>
-        <View style={styles.ratingTitleContainer}>
-          <Text style={styles.ratingTitle}>{item.role}</Text>
-        </View>
-          <View style={styles.starContainer}>
-            <StarRating style={styles.stars}
-              maxStars={5}
-              rating={item.rating}
-              starSize={25}
-              emptyStarColor={'slategray'}
-              halfStarColor={'slategray'}
-              fullStarColor={'slategray'}
-              selectedStar={(rating) => Api.giveUserRatings(user, rating, item.role)}
-            ></StarRating>
-          </View>
+    <View style={styles.ratingInfo}>
+      <View style={styles.ratingTitleContainer}>
+        <Text style={styles.ratingTitle}>{item.role}</Text>
       </View>
+      <View style={styles.starContainer}>
+        <StarRating style={styles.stars}
+          maxStars={5}
+          rating={item.rating}
+          starSize={25}
+          emptyStarColor={'slategray'}
+          halfStarColor={'slategray'}
+          fullStarColor={'slategray'}
+          selectedStar={(rating) => {
+            Api.giveUserRatings(user, rating, item.role)
+            item.setWatcher(item.watcher + 1)
+          }}
+        ></StarRating>
+      </View>
+    </View>
   );
   return null;
 }
@@ -33,26 +36,32 @@ export function UserContent({ route }) {
   const user = route.params.user;
 
   const [ratings, setRatingsData] = useState([]);
+  const [watcher, setWatcher] = useState(0)
 
   const getRatings = async () => {
-        
+
     let response = await Api.getUserRatings(user.username);
 
+    for (let i of response.ratings) {
+      i.setWatcher = setWatcher
+      i.watcher = watcher
+    }
+    console.log(response.ratings)
     setRatingsData(response.ratings);
   }
 
-const renderItem = ({ item }) => {
-  return (
-    <Rating
-      item={item}
-      user={user.username}
-    />
-  );
-};
+  const renderItem = ({ item }) => {
+    return (
+      <Rating
+        item={item}
+        user={user.username}
+      />
+    );
+  };
 
   useEffect(() => {
     getRatings();
-}, []);
+  }, [watcher]);
 
   return (
     <View style={styles.container}>
@@ -62,7 +71,7 @@ const renderItem = ({ item }) => {
             <Text style={styles.username}>{user.username}</Text>
           </View>
           <View style={styles.profilePicContainer}>
-            <Image style={styles.profilePic} source={{uri: 'https://i.imgur.com/lHeVHrG.png'}}></Image>
+            <Image style={styles.profilePic} source={{ uri: 'https://i.imgur.com/lHeVHrG.png' }}></Image>
           </View>
         </View>
       </View>
@@ -71,6 +80,7 @@ const renderItem = ({ item }) => {
           data={ratings}
           renderItem={renderItem}
           keyExtractor={(item) => item.id.toString()}
+          extraData={watcher}
         />
       </View>
     </View>
