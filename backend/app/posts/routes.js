@@ -54,4 +54,17 @@ router.get("/getLBuildingsPosts/:buildingName?",
 	posts.getLBuildingsPosts
 );
 
+
+router.post("/getBuildingOwner",
+	jwt({ secret: config.jwtSecret, algorithms: ["HS256"] }),
+	posts.getBuildingOwner
+);
+
+
+router.post("/changeClaimStatus",
+	jwt({ secret: config.jwtSecret, algorithms: ["HS256"] }),
+	posts.changeClaimStatus
+);
+
+
 module.exports = router;
